@@ -1,0 +1,25 @@
+.card {
+  background-color: var(--color-bg);
+  border-radius: var(--rounded-xl);
+  border-width: var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: var(--size-6);
+  position: relative;
+
+  &[aria-disabled="true"] {
+    pointer-events: none;
+  }
+
+  &[aria-disabled="true"]::after {
+    background-color: rgba(0, 0, 0, .3);
+    border-radius: inherit;
+    content: "";
+    inset: 0;
+    position: absolute;
+  }
+}
+
+.card--selectable:has(:checked) {
+  background-color: rgb(from var(--color-border-light) r g b / .5);
+  border-color: var(--color-border-dark);
+}

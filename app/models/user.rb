@@ -21,6 +21,12 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 12 }
   validates :password, not_pwned: { message: "might easily be guessed" }
+  validates :credits, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :name,
+    presence: true,
+    uniqueness: { case_sensitive: false },
+    length: { minimum: 3, maximum: 50 },
+    format: { with: /\A[a-zA-Z0-9\s]+\z/, message: "only allows letters, numbers, and spaces" }
 
   normalizes :email, with: -> { _1.strip.downcase }
 
@@ -52,7 +58,7 @@ class User < ApplicationRecord
     events.create! action: "password_changed"
   end
 
-  after_update if: [:verified_previously_changed?, :verified?] do
+  after_update if: [ :verified_previously_changed?, :verified? ] do
     events.create! action: "email_verified"
   end
 end

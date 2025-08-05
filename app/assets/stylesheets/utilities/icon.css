@@ -1,0 +1,116 @@
+.icon {
+  background-color: var(--icon-color, currentColor);
+  block-size: var(--icon-size, 1rem);
+  display: inline-block;
+  flex-shrink: 0;
+  inline-size: var(--icon-size, 1rem);
+  mask-image: var(--svg);
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  pointer-events: none;
+  user-select: none;
+}
+img.icon {
+  background: none;
+}
+.icon--loading {
+  --svg: url("loading.svg");
+  animation: var(--animate-spin);
+  animation-duration: 1s;
+}
+/****************************************************************
+* Lucide (https://lucide.dev)
+* Open-source icon library with a consistent style
+*****************************************************************/
+.icon--chevron-left { --svg: url("chevron-left.svg"); }
+.icon--chevron-right { --svg: url("chevron-right.svg"); }
+.icon--chevron-down { --svg: url("chevron-down.svg"); }
+.icon--chevron-up { --svg: url("chevron-up.svg"); }
+.icon--ellipsis { --svg: url("ellipsis.svg"); }
+.icon--chevrons-up-down { --svg: url("chevrons-up-down.svg"); }
+.icon--menu { --svg: url("menu.svg"); }
+.icon--x { --svg: url("x.svg"); }
+.icon--search { --svg: url("search.svg"); }
+.icon--copy { --svg: url("copy.svg"); }
+.icon--download { --svg: url("download.svg"); }
+.icon--share { --svg: url("share.svg"); }
+.icon--camera { --svg: url("camera.svg"); }
+.icon--minus { --svg: url("minus.svg"); }
+.icon--sun { --svg: url("sun.svg"); }
+.icon--moon { --svg: url("moon.svg"); }
+/****************************************************************
+* Showcase icons
+*****************************************************************/
+.icon--circle-alert { --svg: url("circle-alert.svg"); }
+.icon--grip-vertical { --svg: url("grip-vertical.svg"); }
+.icon--circle-plus { --svg: url("circle-plus.svg"); }
+.icon--calendar { --svg: url("calendar.svg"); }
+.icon--car { --svg: url("car.svg"); }
+.icon--volume-2 { --svg: url("volume-2.svg"); }
+.icon--trees { --svg: url("trees.svg"); }
+.icon--speech { --svg: url("speech.svg"); }
+.icon--rocket { --svg: url("rocket.svg"); }
+.icon--users { --svg: url("users.svg"); }
+.icon--wind { --svg: url("wind.svg"); }
+.icon--door-open { --svg: url("door-open.svg"); }
+.icon--waves { --svg: url("waves.svg"); }
+.icon--cloud-rain-wind { --svg: url("cloud-rain-wind.svg"); }
+.icon--smile { --svg: url("smile.svg"); }
+.icon--calculator { --svg: url("calculator.svg"); }
+.icon--user { --svg: url("user.svg"); }
+.icon--play { --svg: url("play.svg"); }
+.icon--credit-card { --svg: url("credit-card.svg"); }
+.icon--settings { --svg: url("settings.svg"); }
+.icon--megaphone { --svg: url("megaphone.svg"); }
+.icon--podcast { --svg: url("podcast.svg"); }
+.icon--voicemail { --svg: url("voicemail.svg"); }
+.icon--newspaper { --svg: url("newspaper.svg"); }
+.icon--message-square-text { --svg: url("message-square-text.svg"); }
+.icon--graduation-cap { --svg: url("graduation-cap.svg"); }
+.icon--circle-check { --svg: url("circle-check.svg"); }
+.icon--circle-user { --svg: url("circle-user.svg"); }
+.icon--sliders-vertical { --svg: url("sliders-vertical.svg"); }
+.icon--zap { --svg: url("zap.svg"); }
+.icon--rotate-ccw { --svg: url("rotate-ccw.svg"); }
+.icon--rotate-cw { --svg: url("rotate-cw.svg"); }
+.icon--app-window { --svg: url("app-window.svg"); }
+.icon--code { --svg: url("code.svg"); }
+.icon--italic { --svg: url("italic.svg"); }
+.icon--bold { --svg: url("bold.svg"); }
+.icon--circle-slash { --svg: url("circle-slash.svg"); }
+.icon--user { --svg: url("user.svg"); }
+.icon--audio-waveform { --svg: url("audio-waveform.svg"); }
+.icon--more-horizontal { --svg: url("more-horizontal.svg"); }
+.icon--panel-left-open { --svg: url("panel-left-open.svg"); }
+.icon--home { --svg: url("home.svg"); }
+.icon--settings { --svg: url("settings.svg"); }
+.icon--apps { --svg: url("apps.svg"); }
+.icon--heart { --svg: url("heart.svg"); }
+.icon--circle-pause { --svg: url("circle-pause.svg"); }
+.icon--play-circle { --svg: url("play-circle.svg"); }
+.icon--pause-circle { --svg: url("pause-circle.svg"); }
+.icon--history { --svg: url("history.svg"); }
+.icon--vc { --svg: url("vc.svg"); }
+.icon--bell { --svg: url("bell.svg"); }
+.icon--rotate-3d { --svg: url("rotate-3d.svg"); }
+.icon--voices { --svg: url("voices.svg"); }
+.icon--boom-box { --svg: url("boom-box.svg"); }
+.icon--audio-lines { --svg: url("audio-lines.svg"); }
+.icon--gallery-vertical-end { --svg: url("gallery-vertical-end.svg"); }
+.icon--square-terminal { --svg: url("square-terminal.svg"); }
+.icon--bot { --svg: url("bot.svg"); }
+.icon--book-open { --svg: url("book-open.svg"); }
+.icon--settings-2 { --svg: url("settings-2.svg"); }
+.icon--frame { --svg: url("frame.svg"); }
+.icon--chart-pie { --svg: url("chart-pie.svg"); }
+.icon--map { --svg: url("map.svg"); }
+.icon--timer { --svg: url("timer.svg"); }
+.icon--circle-check-big { --svg: url("circle-check-big.svg"); }
+.icon--circle-question-mark { --svg: url("circle-question-mark.svg"); }
+.icon--circle { --svg: url("circle.svg"); }
+.icon--circle-off { --svg: url("circle-off.svg"); }
+.icon--arrow-up { --svg: url("arrow-up.svg"); }
+.icon--arrow-down { --svg: url("arrow-down.svg"); }
+.icon--arrow-right { --svg: url("arrow-right.svg"); }
+.icon--chevrons-right { --svg: url("chevrons-right.svg"); }
+.icon--chevrons-left { --svg: url("chevrons-left.svg"); }

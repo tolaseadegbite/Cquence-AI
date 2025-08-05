@@ -1,0 +1,20 @@
+.voice-swatch {
+  /* This ensures it can have a width/height but still sits next to text */
+  display: inline-block;
+  
+  /* Use the existing CSS variable for sizing */
+  width: var(--icon-size);
+  height: var(--icon-size);
+  
+  /* A robust way to create a perfect circle */
+  border-radius: 9999px;
+
+  /* The radial gradient for the pink colors */
+  background-image: radial-gradient(circle, #F9A8D4, #EC4899); /* Light pink to vibrant pink */
+
+  /* Optional: Add a subtle border to make it pop against any background */
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  
+  /* Make sure it aligns nicely with the text */
+  vertical-align: middle;
+}

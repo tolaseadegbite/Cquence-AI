@@ -1,0 +1,40 @@
+/* Hides element on screens LARGER than 48rem */
+@media (width >= 48rem) {
+  .hide\@md { 
+    display: none; 
+  }
+
+  .popover--notifications {
+    --popover-size: 27rem !important;
+  }
+}
+
+/* Hides element on screens LARGER than 64rem */
+@media (width >= 64rem) {
+  .responsive-padding {
+    padding: 5dvh 6.5dvh;
+  }
+
+  .fixed-right-col\@lg {
+    min-block-size: 90dvh;
+  }
+}
+
+/* Hides element on screens Less than 64rem */
+@media (width <= 64rem) {
+  .responsive-padding {
+    padding: 4dvh 3dvh 0;
+  }
+  
+}
+
+/* Hides element by default (mobile-first), then displays it on screens LARGER than 48rem */
+.display-md {
+  display: none;
+}
+@media (width >= 48rem) {
+  .display-md {
+    /* Use 'flex' because your buttons are flex containers */
+    display: flex; 
+  }
+}

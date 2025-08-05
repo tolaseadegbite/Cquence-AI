@@ -8,3 +8,166 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-industrial);
+    line-height: var(--leading-tight);
+  }
+
+ .min-b-screen {
+  min-block-size: 100dvh;
+}
+
+/* app/assets/stylesheets/application.css */
+
+/* --- Album Art & Hover Overlay --- */
+.album-art {
+  inline-size: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.card-image-wrapper {
+  position: relative;
+  display: block;
+}
+  
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.card-image-wrapper:hover .card-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* --- Music Player Bar --- */
+.music-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 90px;
+  padding: 0 1rem;
+  
+  /* Start hidden off-screen */
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.music-player.is-visible {
+  transform: translateY(0);
+}
+
+/* Push content up when player is visible. NO TRANSITION here to prevent flicker. */
+body.has-player-visible {
+  padding-bottom: 90px; /* Must match player height */
+}
+
+.player-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #b3b3b3;
+  cursor: pointer;
+  transition: color 0.2s;
+  position: relative;
+}
+.player-button:hover {
+  color: #ffffff;
+}
+
+.player-button.play-btn {
+  width: 32px;
+  height: 32px;
+  background-color: #ffffff;
+  color: #181818;
+  border-radius: 50%;
+}
+.player-button.play-btn:hover {
+  transform: scale(1.05);
+}
+
+.player-button.is-active {
+  color: #e11d48;
+}
+
+.player-button.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background-color: #e11d48;
+  border-radius: 50%;
+}
+
+
+/* --- Progress Bar --- */
+.progress-bar-container {
+  cursor: pointer;
+}
+
+.progress-bar {
+  background-color: #4d4d4d;
+  height: 4px;
+  border-radius: 2px;
+  width: 100%;
+}
+
+.progress-bar-fill {
+  background-color: #e11d48;
+  width: 0%; /* Start at 0 */
+  height: 100%;
+  border-radius: 2px;
+  position: relative;
+}
+
+.progress-bar-handle {
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.progress-bar-container:hover .progress-bar-handle,
+.progress-bar-container:hover .progress-bar-fill {
+  background-color: #1DB954; /* Spotify Green for hover */
+}
+.progress-bar-container:hover .progress-bar-handle {
+  opacity: 1;
+}
+
+/* Utility to hide elements */
+.hidden {
+  display: none !important;
+}
+
+/* Add this to your application.css */
+button.card-image-wrapper {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}

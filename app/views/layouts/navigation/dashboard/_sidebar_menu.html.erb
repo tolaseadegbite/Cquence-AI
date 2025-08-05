@@ -1,0 +1,203 @@
+<div class="sidebar-menu">
+  <%# -- TOP AND MIDDLE SECTIONS -- %>
+  <%= link_to root_path, class: "flex items-center gap mis-1 mbe-3", style: "--icon-size: 2rem" do %>
+    <span class="icon icon--boom-box" aria-hidden="true"></span>
+    <span class="font-bold text-3xl">Cquence AI</span>
+  <% end %>
+
+  <div class="sidebar-menu__content">
+     <div class="sidebar-menu__group">
+      <div class="sidebar-menu__items">  
+        <nav class="">
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--home" aria-hidden="true"></span>
+            Home
+          <% end %>
+          
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--plus" aria-hidden="true"></span>
+            Create
+          <% end %>
+          
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--users" aria-hidden="true"></span>
+            Followers
+          <% end %>
+        </nav>
+      </div>
+    </div>
+
+    <hr class="menu__separator" role="separator"/>
+    
+    <div class="sidebar-menu__group">
+      <div class="sidebar-menu__group-label">FOR YOU</div>
+      <div class="sidebar-menu__items">  
+        <nav>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--home" aria-hidden="true"></span>
+            Your musics
+          <% end %>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--history" aria-hidden="true"></span>
+            History
+          <% end %>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--home" aria-hidden="true"></span>
+            Playlists
+          <% end %>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--home" aria-hidden="true"></span>
+            Watch later
+          <% end %>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--heart" aria-hidden="true"></span>
+            Liked musics
+          <% end %>
+        </nav>
+      </div>
+    </div>
+
+    <hr class="menu__separator" role="separator"/>
+
+    <div class="sidebar-menu__group">
+      <div class="sidebar-menu__group-label">FOR YOU</div>
+      <div class="sidebar-menu__items">  
+        <nav>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--home" aria-hidden="true"></span>
+            Your musics
+          <% end %>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--history" aria-hidden="true"></span>
+            History
+          <% end %>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--home" aria-hidden="true"></span>
+            Playlists
+          <% end %>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--home" aria-hidden="true"></span>
+            Watch later
+          <% end %>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--heart" aria-hidden="true"></span>
+            Liked musics
+          <% end %>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <%# --- START OF MODIFIED BOTTOM SECTION --- %>
+
+  <%# Theme switcher popover %>
+  <div class="mbs-auto flex flex-col">
+    <div contents 
+         data-controller="popover" 
+         data-popover-placement-value="right-center" 
+         data-action="click@window->popover#clickOutside">
+      <%= button_tag type: "button", class: "btn sidebar-menu__button display-md", data: { action: "click->popover#toggle", popover_target: "trigger" }, aria: { haspopup: "true" } do %>
+        <span class="icon icon--sun icon--color-scheme-light" aria-hidden="true"></span>
+        <span class="icon icon--moon icon--color-scheme-dark" aria-hidden="true"></span>
+        <span class="sr-only">Theme switcher</span>
+        Theme
+      <% end %>
+      <%= tag.div popover: true, id: "dashboard-theme-switcher-popover", class: "popover", style: "--popover-size: 12rem;", data: { popover_target: "content" } do %>
+        <div class="menu" data-controller="menu" data-action="keydown->menu#navigate" role="menu">
+          <button type="button" class="btn menu__item" data-action="popover#hide color-scheme#setLight" data-menu-target="item" role="menuitem">Light</button>
+          <button type="button" class="btn menu__item" data-action="popover#hide color-scheme#setDark" data-menu-target="item" role="menuitem">Dark</button>
+          <button type="button" class="btn menu__item" data-action="popover#hide color-scheme#setSystem" data-menu-target="item" role="menuitem">System</button>
+        </div>
+      <% end %>
+    </div>
+
+    <%# Notifications Popover %>
+    <div contents 
+       data-controller="popover" 
+       data-popover-placement-value="right-center" 
+       data-action="click@window->popover#clickOutside">
+
+      <%= button_tag type: "button", 
+                    class: "btn sidebar-menu__button mbe-1 display-md", 
+                    data: { action: "click->popover#toggle", popover_target: "trigger" }, 
+                    aria: { haspopup: "true" } do %>
+        <span class="icon icon--bell" aria-hidden="true"></span>
+        Notifications
+      <% end %>
+
+      <%= tag.div popover: true, id: "notifications-popover", class: "popover popover--notifications", style: "--popover-size: 29rem;", data: { popover_target: "content" } do %>
+        
+        <%= render "layouts/sidebar/dashboard/notifications_list" %>
+
+      <% end %>
+    </div>
+
+
+    <%# User Profile Popover %>
+    <div contents 
+         data-controller="popover" 
+         data-popover-placement-value="right-start" 
+         data-action="click@window->popover#clickOutside">
+      <%= button_tag type: "button", class: "btn sidebar-menu__button display-md", data: { action: "click->popover#toggle", popover_target: "trigger" }, aria: { haspopup: "true" } do %>
+        <div class="flex shrink-0 overflow-hidden rounded-lg">
+          <%= image_tag "robot.png", size: 32, alt: "User Avatar" %>
+        </div>
+        <div class="flex flex-col text-start leading-tight overflow-hidden">
+          <span class="overflow-ellipsis max-i-full font-semibold"><%= current_user.name %></span>
+          <span class="overflow-ellipsis max-i-full text-xs"><%= current_user.email %></span>
+        </div>
+        <span class="icon icon--chevrons-up-down mis-auto" aria-hidden="true"></span>
+      <% end %>
+      <%= tag.div popover: true, id: "user-menu-popover", class: "popover overflow-hidden", style: "--popover-size: 15rem;", data: { popover_target: "content" } do %>
+
+        <div class="p-2">
+          <%= render "layouts/shared/credits_card" %>
+        </div>
+        <hr class="menu__separator" role="separator"/>
+
+        <div class="menu" data-controller="menu" data-action="keydown->menu#navigate" role="menu">
+          <%= link_to "Settings", "#", class: "btn menu__item", data: { menu_target: "item" }, role: "menuitem" %>
+          <%= link_to "API Keys", "#", class: "btn menu__item", data: { menu_target: "item" }, role: "menuitem" %>
+          <%= link_to "Webhooks", "#", class: "btn menu__item", data: { menu_target: "item" }, role: "menuitem" %>
+          <%= link_to "Usage analytics", "#", class: "btn menu__item", data: { menu_target: "item" }, role: "menuitem" %>
+          <hr class="menu__separator" role="separator"/>
+          <%= link_to "Docs and resources", "#", class: "btn menu__item", data: { menu_target: "item" }, role: "menuitem" %>
+          <%= link_to "Terms and privacy", "#", class: "btn menu__item", data: { menu_target: "item" }, role: "menuitem" %>
+          <hr class="menu__separator" role="separator"/>
+          <%= button_to "Sign out", Current.session, class: "btn menu__item i-full", method: :delete, role: "menuitem" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="hide@md">
+      <%= render "layouts/shared/credits_card" %>
+    </div>    
+  </div>
+  <%# --- END OF BOTTOM SECTION --- %>
+</div>

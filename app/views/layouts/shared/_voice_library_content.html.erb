@@ -1,0 +1,62 @@
+<%# --- START: The Fixed Header Section --- %>
+<div class="shrink-0">
+  <%# Call to Action: Explore Voice Library %>
+  <div class="flex items-start gap-3 p-4 bg-shade rounded-lg relative">
+    <div class="p-3 bg-gradient-purple text-reversed rounded-lg shadow-md">
+      <span class="icon icon--apps" style="--icon-size: 1.5rem" aria-hidden="true"></span>
+    </div>
+    <div class="flex flex-col gap-half">
+      <p class="font-semibold">Explore Voice Library</p>
+      <p class="text-sm text-subtle">Find high quality voices from the community. Perfect for any occasion.</p>
+    </div>
+  </div>
+
+  <%# Search Input %>
+  <div class="pbs-2">
+    <%= select_tag :frameworks, options_for_select(["Arápáregángan", "Oladeji", "Ngozi", "Musa"]), class: "i-full", data: { controller: "combobox" } %>
+  </div>
+
+  <%# Filter Button %>
+  <div class="pbs-2 pbe-2">
+    <%= select_tag :frameworks, options_for_select(["Arápáregángan", "Oladeji", "Ngozi", "Musa"]), class: "i-full", include_blank: "All saved voices", data: { controller: "combobox" } %>
+  </div>
+</div>
+<%# --- END: The Fixed Header Section --- %>
+
+<%# --- START: The Scrollable List Section --- %>
+<div class="flex flex-col grow overflow-y-auto mis-1">
+  <div class="flex justify-between items-center mbe-2 mie-2">
+    <p class="font-semibold">Default</p>
+    <%= link_to "View all", "#", class: "btn text-sm" %>
+  </div>
+
+  <% voice_data_list = [
+      { name: "Alice", desc: "Clear and engaging, friendly woman with...", color1: "#A7F3D0", color2: "#6EE7B7" },
+      { name: "Aria", desc: "A middle-aged female with an African-...", color1: "#BFDBFE", color2: "#93C5FD" },
+      { name: "Bill", desc: "Friendly and comforting voice ready to...", color1: "#C7D2FE", color2: "#A5B4FC" },
+      { name: "Brian", desc: "Middle-aged man with a resonant and...", color1: "#FDE68A", color2: "#FCD34D" },
+      { name: "Callum", desc: "Deceptively gravelly, yet unsettling edge.", color1: "#FBCFE8", color2: "#F9A8D4" },
+      { name: "Alice", desc: "Clear and engaging, friendly woman with...", color1: "#A7F3D0", color2: "#6EE7B7" },
+      { name: "Aria", desc: "A middle-aged female with an African-...", color1: "#BFDBFE", color2: "#93C5FD" },
+      { name: "Bill", desc: "Friendly and comforting voice ready to...", color1: "#C7D2FE", color2: "#A5B4FC" },
+      { name: "Brian", desc: "Middle-aged man with a resonant and...", color1: "#FDE68A", color2: "#FCD34D" },
+      { name: "Callum", desc: "Deceptively gravelly, yet unsettling edge.", color1: "#FBCFE8", color2: "#F9A8D4" }
+    ] 
+  %>
+  <% voice_data_list.each do |voice| %>
+    <%= button_tag type: "button", class: "voice-list-item text-start p-2 mie-2" do %>
+      <div class="flex items-center gap-4">
+        <span class="voice-swatch shrink-0" style="--icon-size: 2.1rem; background-image: radial-gradient(circle, <%= voice[:color1] %>, <%= voice[:color2] %>);" aria-hidden="true"></span>
+        <div class="flex flex-col overflow-hidden">
+          <p class="font-semibold"><%= voice[:name] %></p>
+          <p class="text-sm text-subtle overflow-ellipsis"><%= voice[:desc] %></p>
+        </div>
+        <div class="mis-auto shrink-0 flex items-center gap-2">
+          <span class="icon icon--play-circle" style="--icon-size: 1.5rem" aria-hidden="true"></span>
+          <span class="icon icon--more-horizontal" style="--icon-size: 1.5rem" aria-hidden="true"></span>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<%# --- END: The Scrollable List Section --- %>

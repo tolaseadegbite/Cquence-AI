@@ -8,38 +8,38 @@ Rails.application.routes.draw do
   post "sign_in", to: "sessions#create"
   get  "sign_up", to: "registrations#new"
   post "sign_up", to: "registrations#create"
-  resources :sessions, only: [:index, :show, :destroy]
-  resource  :password, only: [:edit, :update]
+  resources :sessions, only: [ :index, :show, :destroy ]
+  resource  :password, only: [ :edit, :update ]
   namespace :identity do
-    resource :email,              only: [:edit, :update]
-    resource :email_verification, only: [:show, :create]
-    resource :password_reset,     only: [:new, :edit, :create, :update]
+    resource :email,              only: [ :edit, :update ]
+    resource :email_verification, only: [ :show, :create ]
+    resource :password_reset,     only: [ :new, :edit, :create, :update ]
   end
   namespace :authentications do
     resources :events, only: :index
   end
   namespace :two_factor_authentication do
     namespace :challenge do
-      resource :security_keys,  only: [:new, :create]
-      resource :totp,           only: [:new, :create]
-      resource :recovery_codes, only: [:new, :create]
+      resource :security_keys,  only: [ :new, :create ]
+      resource :totp,           only: [ :new, :create ]
+      resource :recovery_codes, only: [ :new, :create ]
     end
     namespace :profile do
       resources :security_keys
-      resource  :totp,           only: [:new, :create, :update]
-      resources :recovery_codes, only: [:index, :create]
+      resource  :totp,           only: [ :new, :create, :update ]
+      resources :recovery_codes, only: [ :index, :create ]
     end
   end
   get  "/auth/failure",            to: "sessions/omniauth#failure"
   get  "/auth/:provider/callback", to: "sessions/omniauth#create"
   post "/auth/:provider/callback", to: "sessions/omniauth#create"
   post "users/:user_id/masquerade", to: "masquerades#create", as: :user_masquerade
-  resource :invitation, only: [:new, :create]
+  resource :invitation, only: [ :new, :create ]
   namespace :sessions do
-    resource :passwordless, only: [:new, :edit, :create]
-    resource :sudo, only: [:new, :create]
+    resource :passwordless, only: [ :new, :edit, :create ]
+    resource :sudo, only: [ :new, :create ]
   end
-  root "home#index"
+  root "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -52,4 +52,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  get "/dashboard", to: "dashboard#index"
+  get "/settings", to: "home#index"
+  get "/dashboard", to: "dashboard#index"
+  get "/pricing", to: "pages#pricing"
+  get "/help", to: "pages#help"
+  get "/about", to: "pages#about"
+  get "/press", to: "pages#press"
 end

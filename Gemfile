@@ -33,6 +33,7 @@ end
 group :development do
   # Use console on exceptions pages
   gem "web-console"
+  gem "hotwire-spark"
 end
 
 group :test do

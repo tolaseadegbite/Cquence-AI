@@ -1,22 +1,25 @@
-<div class="p-4 i-full bg-main" style="max-inline-size: 25rem;">
+<div class="p-4 i-full bg-main p-5 border-1 border-subtle rounded-lg" style="max-inline-size: 25rem;">
   <div class="text-center">
-    <div class="mbe-5">
+    <div class="">
       <%= link_to root_path, class: "block" do %>
-        <span class="icon icon--audio-waveform p-8" aria-hidden="true"></span>
+        <span class="icon icon--boom-box p-8" aria-hidden="true"></span>
       <% end %>
     </div>
-    <h1 class="font-semibold text-2xl mbe-5">Sign in to SpeechstackAI</h1>
+    <div class="mbs-2 mbe-2">
+      <h1 class="font-semibold text-2xl">Cquence AI</h1>
+      <p class="font-normal text-xl mbe-5 text-subtle">Sign in</p>
+    </div>
   </div>
 
   <%= form_with(url: sign_in_path) do |form| %>
     <div class="mbe-5">
       <%= form.label :email, style: "display: block", class: "font-semibold mbe-2" %>
-      <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, autocomplete: "email", class: "input" %>
+      <%= form.email_field :email, value: params[:email_hint], placeholder: "Enter your email", required: true, autofocus: true, autocomplete: "email", class: "input" %>
     </div>
 
     <div class="mbe-5">
       <%= form.label :password, style: "display: block", class: "font-semibold mbe-2" %>
-      <%= form.password_field :password, required: true, autocomplete: "current-password", class: "input" %>
+      <%= form.password_field :password, placeholder: "Enter your password", required: true, autocomplete: "current-password", class: "input" %>
     </div>
 
     <div>

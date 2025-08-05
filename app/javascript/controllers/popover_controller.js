@@ -21,7 +21,7 @@ export default class extends Controller {
   }
 
   show() {
-    this.contentTarget.showPopover({ source: this.triggerTarget })
+    this.contentTarget.showPopover()
   }
 
   hide() {
@@ -29,7 +29,22 @@ export default class extends Controller {
   }
 
   toggle() {
-    this.contentTarget.togglePopover({ source: this.triggerTarget })
+    // This uses the native toggle behavior.
+    this.contentTarget.togglePopover()
+  }
+
+  // NEW: Method to handle clicks outside the component
+  clickOutside(event) {
+    // Check if the popover is currently open
+    const isOpen = this.contentTarget.matches(":popover-open")
+
+    // Check if the click happened outside the controller's element
+    // this.element refers to the element with `data-controller="popover"`
+    const isOutside = !this.element.contains(event.target)
+
+    if (isOpen && isOutside) {
+      this.hide()
+    }
   }
 
   debouncedShow() {

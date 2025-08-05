@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag "css-zero/reset", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "css-zero/variables", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "css-zero/utilities", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-main" data-controller="color-scheme">
+    <%# --- This layout is for SIGNED-IN users --- %>
+
+    <% if notice.present? %>
+      <div popover class="flash flash--positive" style="z-index: 9999;" data-controller="element-removal" data-action="animationend->element-removal#remove" role="status"><%= notice %></div>
+    <% elsif alert.present? %>
+      <div popover class="flash flash--negative" data-controller="element-removal" data-action="animationend->element-removal#remove" role="alert"><%= alert %></div>
+    <% end %>
+
+    <%#= render "layouts/navigation/navbar" %>
+
+    <div class="sidebar-layout">
+      <aside id="sidebar">
+        <%= render "layouts/navigation/dashboard/sidebar_menu" %>
+      </aside>
+
+      <main id="main" style="padding: 0 !important; gap: 0">
+        <div class="header-layout">
+            <header class="" id="header">
+                <%= render "layouts/navigation/dashboard/mobile_menu" %>
+                <%= render "layouts/navigation/dashboard/header_menu" %>
+            </header>
+            <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>

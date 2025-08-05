@@ -24,6 +24,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
+  <%# --- This layout is for PUBLIC and AUTH pages --- %>
+
+  <% auth_pages = controller_name.in?(['sessions', 'passwords', 'registrations', 'passwordlesses', 'password_resets']) %>
+
   <body class="<%= 'min-b-screen flex flex-col justify-center items-center p-4' if auth_pages %> bg-main" data-controller="color-scheme">
 
     <% if notice.present? %>

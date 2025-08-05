@@ -1,0 +1,32 @@
+<%#
+  This is a reusable component for a trigger button that opens a bottom sheet.
+  - trigger: A block that defines the button HTML.
+  - content_partial: The path to the partial to render inside the sheet.
+  - label: A string for the aria-label.
+  - id_prefix: (Optional) A string to prefix IDs within the content partial.
+%>
+<% id_prefix ||= nil %>
+
+<%# THIS IS THE CONTROLLER THAT LISTENS FOR THE ACTION %>
+<div contents data-controller="dialog">
+  <%= trigger %>
+
+  <dialog 
+    class="sheet sheet--bottom flex flex-col pbe-4 overflow-hidden"
+    data-dialog-target="content" 
+    data-action="click->dialog#closeOnClickOutside" 
+    aria-label="<%= label %>">
+    
+    <div class="relative shrink-0">
+      <button type="button" class="btn btn--plain absolute text-subtle" style="top: 0.2rem; right: 1rem;" data-action="click->dialog#close">
+        <span class="icon icon--x" aria-hidden="true"></span>
+        <span class="sr-only">Close</span>
+      </button>
+    </div>
+
+    <div class="sheet__content sheet_wrapper pis-3 pie-4 pbs-0 grow flex flex-col min-b-0">
+      <%# The history items are rendered inside here %>
+      <%= render partial: content_partial, locals: { id_prefix: id_prefix } %>
+    </div>
+  </dialog>
+</div>

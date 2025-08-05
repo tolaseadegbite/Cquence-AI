@@ -92,6 +92,7 @@ img.icon {
 .icon--history { --svg: url("history.svg"); }
 .icon--vc { --svg: url("vc.svg"); }
 .icon--bell { --svg: url("bell.svg"); }
+.icon--plus { --svg: url("plus.svg"); }
 .icon--rotate-3d { --svg: url("rotate-3d.svg"); }
 .icon--voices { --svg: url("voices.svg"); }
 .icon--boom-box { --svg: url("boom-box.svg"); }

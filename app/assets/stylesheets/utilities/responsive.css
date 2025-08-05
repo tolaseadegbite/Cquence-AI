@@ -2,7 +2,7 @@
 @media (width >= 48rem) {
   .hide\@md { 
     display: none; 
-  }
+}
 
   .popover--notifications {
     --popover-size: 27rem !important;
@@ -18,12 +18,20 @@
   .fixed-right-col\@lg {
     min-block-size: 90dvh;
   }
+
+  .main-wrapper {
+    padding: var(--size-4);
+  }
 }
 
 /* Hides element on screens Less than 64rem */
 @media (width <= 64rem) {
   .responsive-padding {
     padding: 4dvh 3dvh 0;
+  }
+
+  .main-wrapper {
+    padding: var(--size-4);
   }
   
 }

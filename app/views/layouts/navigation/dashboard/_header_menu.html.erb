@@ -1,0 +1,67 @@
+<div class="flex justify-between items-center container">
+  <div class="flex items-center">
+    <span class="font-bold"><%= yield(:page_header) || "Dashboard" %></span>
+  </div>
+
+  <div class="flex items-center items-center gap">
+    <div class="show@md gap">
+      <div class="input input--clearable input--actor flex items-center gap" data-controller="input-clearable">
+        <%= search_field_tag "input_clearable", nil, placeholder: "Type something", data: { input_clearable_target: "input" } %>
+        <button type="button" class="btn btn--plain" data-action="input-clearable#clear">
+          <span class="icon icon--x" aria-hidden="true"></span>
+          <span class="sr-only">Clear input</span>
+        </button>
+      </div>
+    </div>
+    
+    <div contents data-controller="popover" data-popover-placement-value="bottom-center">
+      <button type="button" class="btn btn--icon hide@md" data-popover-target="trigger" popovertarget="color_scheme_popover" aria-haspopup="true">
+        <span class="icon icon--sun icon--color-scheme-light" aria-hidden="true"></span>
+        <span class="icon icon--moon icon--color-scheme-dark" aria-hidden="true"></span>
+        <span class="sr-only">Theme switcher</span>
+      </button>
+
+      <div popover id="color_scheme_popover" class="popover" style="--popover-size: 12rem;" data-popover-target="content">
+        <div class="menu" data-controller="menu" data-action="keydown->menu#navigate" role="menu">
+          <button type="button" class="btn menu__item" data-action="popover#hide color-scheme#setLight" data-menu-target="item" role="menuitem">Light</button>
+          <button type="button" class="btn menu__item" data-action="popover#hide color-scheme#setDark" data-menu-target="item" role="menuitem">Dark</button>
+          <button type="button" class="btn menu__item" data-action="popover#hide color-scheme#setSystem" data-menu-target="item" role="menuitem">System</button>
+        </div>
+      </div>
+    </div>
+    
+    <%# Notifications dropdown %>
+    <div contents 
+         data-controller="popover" 
+         data-popover-placement-value="bottom-center" <%# Placement for header %>
+         data-action="click@window->popover#clickOutside">
+
+      <button type="button" class="btn btn--icon hide@md" 
+              data-action="click->popover#toggle" data-popover-target="trigger" aria-haspopup="true">
+        <span class="icon icon--bell" aria-hidden="true"></span>
+      </button>
+
+      <%= tag.div popover: true, id: "header-notifications-popover", class: "popover popover--notifications", style: "--popover-size: 23rem;", data: { popover_target: "content" } do %>
+        <%= render "layouts/sidebar/dashboard/notifications_list" %>
+      <% end %>
+    </div>
+
+    <%# User profile dropdown %>
+    <div contents data-controller="popover" data-popover-placement-value="bottom-end">
+      <button type="button" class="btn p-0 rounded-lg hide@md" data-popover-target="trigger" popovertarget="md_user_popover" aria-haspopup="true">
+        <%= image_tag "robot.png", size: 32, class: "rounded-lg", alt: "User Avatar" %>
+      </button>
+
+      <div popover id="md_user_popover" class="popover" style="--popover-size: 12rem;" data-popover-target="content">
+        <div class="menu" data-controller="menu" data-action="keydown->menu#navigate" role="menu">
+          <%= link_to "Account settings", "", class: "btn menu__item", data: { menu_target: "item" }, role: "menuitem" %>
+          <%= link_to "API Keys", "", class: "btn menu__item", data: { menu_target: "item" }, role: "menuitem" %>
+          <%= link_to "Webhooks", "", class: "btn menu__item", data: { menu_target: "item" }, role: "menuitem" %>
+          <%= link_to "Subscription", "", class: "btn menu__item", data: { menu_target: "item" }, role: "menuitem" %>
+          <hr class="menu__separator" role="separator"/>
+          <%= button_to "Sign out", Current.session, class: "btn menu__item i-full", method: :delete, role: "menuitem" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

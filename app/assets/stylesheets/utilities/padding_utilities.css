@@ -1,0 +1,132 @@
+/****************************************************************
+* Padding
+*****************************************************************/
+.p-0 { padding: 0; }
+.p-1 { padding: var(--size-1); }
+.p-2 { padding: var(--size-2); }
+.p-3 { padding: var(--size-3); }
+.p-4 { padding: var(--size-4); }
+.p-5 { padding: var(--size-5); }
+.p-6 { padding: var(--size-6); }
+.p-8 { padding: var(--size-8); }
+.p-10 { padding: var(--size-10); }
+
+.pb-0 { padding-block: 0; }
+.pb-1 { padding-block: var(--size-1); }
+.pb-2 { padding-block: var(--size-2); }
+.pb-3 { padding-block: var(--size-3); }
+.pb-4 { padding-block: var(--size-4); }
+.pb-5 { padding-block: var(--size-5); }
+.pb-6 { padding-block: var(--size-6); }
+.pb-8 { padding-block: var(--size-8); }
+.pb-10 { padding-block: var(--size-10); }
+
+.pbs-0 { padding-block-start: 0; }
+.pbs-1 { padding-block-start: var(--size-1); }
+.pbs-2 { padding-block-start: var(--size-2); }
+.pbs-3 { padding-block-start: var(--size-3); }
+.pbs-4 { padding-block-start: var(--size-4); }
+.pbs-5 { padding-block-start: var(--size-5); }
+.pbs-6 { padding-block-start: var(--size-6); }
+.pbs-8 { padding-block-start: var(--size-8); }
+.pbs-10 { padding-block-start: var(--size-10); }
+
+.pbe-0 { padding-block-end: 0; }
+.pbe-1 { padding-block-end: var(--size-1); }
+.pbe-2 { padding-block-end: var(--size-2); }
+.pbe-3 { padding-block-end: var(--size-3); }
+.pbe-4 { padding-block-end: var(--size-4); }
+.pbe-5 { padding-block-end: var(--size-5); }
+.pbe-6 { padding-block-end: var(--size-6); }
+.pbe-8 { padding-block-end: var(--size-8); }
+.pbe-10 { padding-block-end: var(--size-10); }
+
+.pi-0 { padding-inline: 0; }
+.pi-1 { padding-inline: var(--size-1); }
+.pi-2 { padding-inline: var(--size-2); }
+.pi-3 { padding-inline: var(--size-3); }
+.pi-4 { padding-inline: var(--size-4); }
+.pi-5 { padding-inline: var(--size-5); }
+.pi-6 { padding-inline: var(--size-6); }
+.pi-8 { padding-inline: var(--size-8); }
+.pi-10 { padding-inline: var(--size-10); }
+
+.pis-0 { padding-inline-start: 0; }
+.pis-1 { padding-inline-start: var(--size-1); }
+.pis-2 { padding-inline-start: var(--size-2); }
+.pis-3 { padding-inline-start: var(--size-3); }
+.pis-4 { padding-inline-start: var(--size-4); }
+.pis-5 { padding-inline-start: var(--size-5); }
+.pis-6 { padding-inline-start: var(--size-6); }
+.pis-8 { padding-inline-start: var(--size-8); }
+.pis-10 { padding-inline-start: var(--size-10); }
+
+.pie-0 { padding-inline-end: 0; }
+.pie-1 { padding-inline-end: var(--size-1); }
+.pie-2 { padding-inline-end: var(--size-2); }
+.pie-3 { padding-inline-end: var(--size-3); }
+.pie-4 { padding-inline-end: var(--size-4); }
+.pie-5 { padding-inline-end: var(--size-5); }
+.pie-6 { padding-inline-end: var(--size-6); }
+.pie-8 { padding-inline-end: var(--size-8); }
+.pie-10 { padding-inline-end: var(--size-10); }
+
+/****************************************************************
+* Padding (Shorthand Aliases)
+* These are common aliases for the logical properties above.
+*****************************************************************/
+
+/* Padding X-axis (left & right) - Alias for 'pi-*' */
+.px-0 { padding-inline: 0; }
+.px-1 { padding-inline: var(--size-1); }
+.px-2 { padding-inline: var(--size-2); }
+.px-3 { padding-inline: var(--size-3); }
+.px-4 { padding-inline: var(--size-4); }
+.px-5 { padding-inline: var(--size-5); }
+.px-6 { padding-inline: var(--size-6); }
+.px-8 { padding-inline: var(--size-8); }
+.px-10 { padding-inline: var(--size-10); }
+
+/* Padding Y-axis (top & bottom) - Alias for 'pb-*' */
+.py-0 { padding-block: 0; }
+.py-1 { padding-block: var(--size-1); }
+.py-2 { padding-block: var(--size-2); }
+.py-3 { padding-block: var(--size-3); }
+.py-4 { padding-block: var(--size-4); }
+.py-5 { padding-block: var(--size-5); }
+.py-6 { padding-block: var(--size-6); }
+.py-8 { padding-block: var(--size-8); }
+.py-10 { padding-block: var(--size-10); }
+
+/* Padding Top - Alias for 'pbs-*' */
+.pt-0 { padding-block-start: 0; }
+.pt-1 { padding-block-start: var(--size-1); }
+.pt-2 { padding-block-start: var(--size-2); }
+.pt-3 { padding-block-start: var(--size-3); }
+.pt-4 { padding-block-start: var(--size-4); }
+.pt-5 { padding-block-start: var(--size-5); }
+.pt-6 { padding-block-start: var(--size-6); }
+.pt-8 { padding-block-start: var(--size-8); }
+.pt-10 { padding-block-start: var(--size-10); }
+
+/* Padding Right - Alias for 'pie-*' */
+.pr-0 { padding-inline-end: 0; }
+.pr-1 { padding-inline-end: var(--size-1); }
+.pr-2 { padding-inline-end: var(--size-2); }
+.pr-3 { padding-inline-end: var(--size-3); }
+.pr-4 { padding-inline-end: var(--size-4); }
+.pr-5 { padding-inline-end: var(--size-5); }
+.pr-6 { padding-inline-end: var(--size-6); }
+.pr-8 { padding-inline-end: var(--size-8); }
+.pr-10 { padding-inline-end: var(--size-10); }
+
+/* Padding Left - Alias for 'pis-*' */
+.pl-0 { padding-inline-start: 0; }
+.pl-1 { padding-inline-start: var(--size-1); }
+.pl-2 { padding-inline-start: var(--size-2); }
+.pl-3 { padding-inline-start: var(--size-3); }
+.pl-4 { padding-inline-start: var(--size-4); }
+.pl-5 { padding-inline-start: var(--size-5); }
+.pl-6 { padding-inline-start: var(--size-6); }
+.pl-8 { padding-inline-start: var(--size-8); }
+.pl-10 { padding-inline-start: var(--size-10); }

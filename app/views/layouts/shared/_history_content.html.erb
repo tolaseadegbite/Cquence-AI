@@ -1,0 +1,37 @@
+<%# --- START: The Fixed Header Section --- %>
+<div class="shrink-0 pbe-2">
+  <input type="search" class="input i-full" placeholder="Search history...">
+</div>
+<%# --- END: The Fixed Header Section --- %>
+
+
+<%# --- START: The Scrollable List Section --- %>
+<div class="flex flex-col gap-4 grow overflow-y-auto pbs-2">
+  
+  <%# Date Pill/Separator %>
+  <div class="flex justify-center">
+    <div class="btn rounded-lg bg-shade">3/23/2025</div>
+  </div>
+
+  <%# History Items %>
+  <% 10.times do %>
+    <%# THE FIX: Removed the `click->dialog#close` action. %>
+    <button type="button" class="flex justify-between items-center voice-list-item text-start p-2" 
+            data-action="click->player-visibility#toggle">
+     <div class="flex flex-col gap-half text-sm">
+        <p class="overflow-ellipsis font-semibold">This is a test of the amazing...</p>
+        <div class="flex items-center gap-2 text-sm text-subtle">
+          <span class="voice-swatch" style="--icon-size: 1rem; background-image: radial-gradient(circle, #FBCFE8, #F9A8D4);" aria-hidden="true"></span>
+          <span>Tolase · 09:03 PM</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 shrink-0 mis-2">
+        <span class="icon icon--play-circle" style="--icon-size: 1.2rem" aria-hidden="true"></span>
+        <span class="icon icon--download" style="--icon-size: 1.2rem" aria-hidden="true"></span>
+      </div>
+    </button>
+  <% end %>
+
+</div>
+<%# --- END: The Scrollable List Section --- %>

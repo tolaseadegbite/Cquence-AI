@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_05_224728) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_06_135908) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -106,6 +106,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_224728) do
     t.integer "likes_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -137,5 +139,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_224728) do
   add_foreign_key "sign_in_tokens", "users"
   add_foreign_key "song_categories", "categories"
   add_foreign_key "song_categories", "songs"
+  add_foreign_key "songs", "users"
   add_foreign_key "users", "accounts"
 end

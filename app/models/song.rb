@@ -6,7 +6,7 @@ class Song < ApplicationRecord
   has_many :song_categories, dependent: :destroy
   has_many :categories, through: :song_categories
 
-  enum status: {
+  enum :status, {
     pending: 0,
     processing: 1,
     processed: 2,

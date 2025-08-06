@@ -6,11 +6,11 @@ class Song < ApplicationRecord
   has_many :song_categories, dependent: :destroy
   has_many :categories, through: :song_categories
 
-  enum :status, {
-    queued: 0,
+  enum status: {
+    pending: 0,
     processing: 1,
     processed: 2,
     failed: 3,
-    deleted: 4
-  }, default: :queued
+    no_credits: 4
+  }
 end

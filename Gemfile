@@ -1,25 +1,27 @@
 source "https://rubygems.org"
 
-gem "rails", "~> 8.0.2"
+gem "rails",                                "~> 8.0.2"
 gem "bootsnap", require: false
 gem "importmap-rails"
 gem "jbuilder"
 gem "kamal", require: false
-gem "pg", "~> 1.1"
+gem "mission_control-jobs"
+gem "pg",                                   "~> 1.1"
 gem "propshaft"
-gem "puma", ">= 5.0"
+gem "puma",                                 ">= 5.0"
 gem "solid_cache"
 gem "solid_cable"
 gem "solid_queue"
 gem "stimulus-rails"
+gem "sqlite3",                              "2.5.0"
 gem "thruster", require: false
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Use Active Model has_secure_password
-gem "bcrypt", "~> 3.1.7"
+gem "bcrypt",                              "~> 3.1.7"
 # Use Active Storage variants
-gem "image_processing", "~> 1.2"
+gem "image_processing",                    "~> 1.2"
 
 group :development, :test do
   # Static analysis for security vulnerabilities
@@ -34,6 +36,7 @@ group :development do
   # Use console on exceptions pages
   gem "web-console"
   gem "hotwire-spark"
+  gem "letter_opener_web", "~> 3.0"
 end
 
 group :test do

@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  s3_key: MyString
+  thumbnail_s3_key: MyString
+  status: 1
+  instrumental: false
+  prompt: MyText
+  lyrics: MyText
+  full_described_song: MyText
+  described_lyrics: MyText
+  guidance_scale: 1.5
+  infer_step: 1.5
+  audio_duration: 1.5
+  seed: 1.5
+  published: false
+  listen_count: 1
+  likes_count: 1
+
+two:
+  title: MyString
+  s3_key: MyString
+  thumbnail_s3_key: MyString
+  status: 1
+  instrumental: false
+  prompt: MyText
+  lyrics: MyText
+  full_described_song: MyText
+  described_lyrics: MyText
+  guidance_scale: 1.5
+  infer_step: 1.5
+  audio_duration: 1.5
+  seed: 1.5
+  published: false
+  listen_count: 1
+  likes_count: 1

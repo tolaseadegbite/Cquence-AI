@@ -2,7 +2,7 @@
   <%# -- TOP AND MIDDLE SECTIONS -- %>
   <%= link_to root_path, class: "flex items-center gap mis-1 mbe-3", style: "--icon-size: 2rem" do %>
     <span class="icon icon--boom-box" aria-hidden="true"></span>
-    <span class="font-bold text-3xl">Cquence AI</span>
+    <span class="font-bold text-3xl">CQuence AI</span>
   <% end %>
 
   <div class="sidebar-menu__content">
@@ -43,7 +43,7 @@
                       class: "btn sidebar-menu__button mbe-1", 
                       aria: (current_page?("") ? { current: "page" } : {}) do %>
             <span class="icon icon--home" aria-hidden="true"></span>
-            Your musics
+            Your songs
           <% end %>
           <%= link_to "", 
                       class: "btn sidebar-menu__button mbe-1", 
@@ -67,7 +67,7 @@
                       class: "btn sidebar-menu__button mbe-1", 
                       aria: (current_page?("") ? { current: "page" } : {}) do %>
             <span class="icon icon--heart" aria-hidden="true"></span>
-            Liked musics
+            Liked songs
           <% end %>
         </nav>
       </div>

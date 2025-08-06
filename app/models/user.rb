@@ -18,6 +18,10 @@ class User < ApplicationRecord
   has_many :sign_in_tokens, dependent: :destroy
   has_many :events, dependent: :destroy
 
+  has_many :songs, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_songs, through: :likes, source: :song
+
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 12 }
   validates :password, not_pwned: { message: "might easily be guessed" }

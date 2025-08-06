@@ -9,13 +9,42 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-industrial);
-    line-height: var(--leading-tight);
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-industrial);
+  line-height: var(--leading-tight);
+}
 
- .min-b-screen {
-  min-block-size: 100dvh;
+.min-b-screen {
+  min-block-size: 100dvh; /* 100vh = 100% of the viewport height */
+}
+ 
+.min-b-screen-80 {
+  min-block-size: 80dvh; /* 100vh = 80% of the viewport height */
+}
+ 
+.min-b-screen-90, .fixed-right-col {
+  min-block-size: 90dvh; /* 90vh = 90% of the viewport height */
+}
+
+/* Style for the popover that holds the notifications */
+.popover--notifications {
+  /* Remove default popover padding to allow content to go edge-to-edge */
+  --popover-padding: 0; 
+}
+
+/* The scrollable list inside the popover */
+.popover__scrollable-list {
+  /* Set a max-height. When content exceeds this, a scrollbar will appear. */
+  max-block-size: 78dvh; /* 78% of the viewport height is a good starting point */
+  overflow-y: auto;
+}
+
+.popover__item {
+  transition: background-color var(--time-150);
+}
+
+.popover__item:hover {
+  background-color: var(--color-border-light);
 }
 
 /* app/assets/stylesheets/application.css */

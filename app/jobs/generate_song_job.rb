@@ -86,9 +86,14 @@ class GenerateSongJob < ApplicationJob
       )
 
       if data[:categories].present?
-        categories = data[:categories].map do |category_name|
-          Category.find_or_create_by!(name: category_name)
+        normalized_names = data[:categories].map { |name| name.to_s.strip.downcase }
+        valid_category_names = normalized_names.select(&:present?).uniq
+
+        # THIS IS THE FIX: A robust, case-insensitive find_or_create_by
+        categories = valid_category_names.map do |name|
+          Category.where("LOWER(name) = ?", name).first_or_create!(name: name)
         end
+
         song.categories = categories
       end
     end

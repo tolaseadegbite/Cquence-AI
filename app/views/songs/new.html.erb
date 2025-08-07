@@ -1,0 +1,15 @@
+<% provide(:title, "New song") %>
+<% content_for :page_header, "Create" %>
+
+<div class="grow grid@lg grid-cols-12@lg">
+  <div class="col-span-4@md flex flex-col">
+    <%= render "form", song: @song %>
+  </div>
+
+  <div class="col-span-8@md">
+    <div class="bg-main border-is border-subtle p-8 b-full">
+      <h2 class="font-semibold text-2xl">Your Creations</h2>
+      <p class="text-subtle mbs-2">Songs you are generating will appear here.</p>
+    </div>
+  </div>
+</div>

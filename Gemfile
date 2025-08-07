@@ -60,3 +60,4 @@ gem "rotp"
 gem "rqrcode"
 # Use webauthn for making rails become a conformant web authn relying party [https://github.com/cedarcode/webauthn-ruby]
 gem "webauthn"
+gem "aws-sdk-s3", "~> 1"

@@ -1,29 +1,21 @@
 # config/solid_queue.yml
 
-# 1. Define all your queues and their properties.
 queues:
-  # A dedicated queue for long-running, API-dependent song generation jobs.
   song_generation:
-    concurrency_limit: 5 # A global safeguard limit for this queue.
+    concurrency_limit: 5
     timeout: 360
 
-  # The default queue for all other jobs (e.g., sending emails, etc.).
   default:
     concurrency_limit: 10
 
-# 2. Define your worker pools. Each entry under 'workers' runs as a separate
-#    supervisor process that manages its own threads.
 workers:
   # Worker Pool #1: Dedicated to Song Generation
-  # This pool ONLY processes jobs from the 'song_generation' queue.
   - queues: song_generation
-    threads: 2           # Let's say we can handle 2 simultaneous song generations.
-    polling_interval: 5  # No need to poll the DB every 0.1s for these long jobs.
+    threads: 2
+    polling_interval: 5
 
-  # Worker Pool #2: General Purpose Workers
-  # This pool processes jobs from ALL queues EXCEPT 'song_generation'.
-  # This is the key to preventing head-of-line blocking.
-  - queues: -song_generation
-    threads: 3           # The original 3 threads for all other application jobs.
-    processes: <%= ENV.fetch("JOB_CONCURRENCY", 1) %> # Scales horizontally based on ENV var.
-    polling_interval: 0.1 # Poll frequently for fast, responsive jobs.
+  # Worker Pool #2: General Purpose "Catch-All" Workers
+  - queues: default
+    threads: 3
+    processes: <%= ENV.fetch("JOB_CONCURRENCY", 1) %>
+    polling_interval: 0.1

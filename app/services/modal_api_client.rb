@@ -1,11 +1,8 @@
-# app/services/modal_api_client.rb
 require "net/http"
 require "uri"
 require "json"
 
 class ModalApiClient
-  # Set a generous timeout for this long-running API call.
-  # 300 seconds = 5 minutes.
   REQUEST_TIMEOUT = 300
 
   def self.generate(endpoint, body)
@@ -13,10 +10,8 @@ class ModalApiClient
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
 
-    # === ADD THESE LINES TO SET THE TIMEOUT ===
-    http.open_timeout = 10 # Time to open connection (seconds)
-    http.read_timeout = REQUEST_TIMEOUT # Time to wait for response (seconds)
-    # ==========================================
+    http.open_timeout = 10
+    http.read_timeout = REQUEST_TIMEOUT
 
     request = Net::HTTP::Post.new(uri.request_uri)
     request["Content-Type"] = "application/json"

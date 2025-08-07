@@ -1,0 +1,101 @@
+<%= form_with model: song, class: "bg-main flex flex-col i-full", style: "min-block-size: 85dvh;", data: { controller: "song-panel" } do |form| %>
+  
+  <%= form.hidden_field :mode, value: "simple", data: { song_panel_target: "modeInput" } %>
+
+  <%# The main content area that grows and becomes scrollable. %>
+  <div class="grow overflow-y-auto p-4">
+    
+    <div class="tabs i-full" data-controller="tabs">
+      <div class="tabs__list" role="tablist">
+        <button type="button" id="trigger_simple" class="btn tabs__button" data-tabs-target="button" data-action="tabs#select song-panel#setMode" data-mode="simple" role="tab" aria-controls="tab_simple">Simple</button>
+        <button type="button" id="trigger_custom" class="btn tabs__button" data-tabs-target="button" data-action="tabs#select song-panel#setMode" data-mode="custom" role="tab" aria-controls="tab_custom">Custom</button>
+      </div>
+
+      <%# === SIMPLE MODE TAB === %>
+      <div hidden id="tab_simple" data-tabs-target="tab" role="tabpanel" aria-labelledby="trigger_simple" class="mbs-6">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <%= form.label :full_described_song, "Describe your song", class: "text-sm font-medium" %>
+            <%= form.text_area :full_described_song,
+                  placeholder: "A dreamy lofi hip hop song...",
+                  class: "input bg-shade border-subtle",
+                  style: "min-block-size: 160px; resize: none;",
+                  data: { song_panel_target: "descriptionField" } %>
+          </div>
+          <div class="flex items-center justify-between">
+            <button type="button" 
+                    class="btn btn--secondary" 
+                    data-action="click->tabs#selectByIndex" 
+                    data-tabs-index-param="1">
+              <span class="icon icon--plus mie-2" aria-hidden="true"></span>
+              Lyrics
+            </button>
+            <div class="flex items-center gap-2">
+              <%= form.label :instrumental_simple, "Instrumental", class: "text-sm font-medium" %>
+              <%= form.check_box :instrumental, { id: "instrumental_simple", class: "switch", role: "switch" } %>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="text-sm font-medium">Inspiration</label>
+            <div class="flex flex-wrap gap-2 pbe-2">
+              <% @inspiration_tags.each do |tag| %>
+                <button type="button" class="btn btn--secondary text-xs" data-tag="<%= tag %>" data-action="song-panel#addInspirationTag">
+                  <span class="icon icon--plus mie-1" aria-hidden="true"></span> <%= tag %>
+                </button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%# === CUSTOM MODE TAB === %>
+      <div hidden id="tab_custom" data-tabs-target="tab" role="tabpanel" aria-labelledby="trigger_custom" class="mbs-6">
+        <%= form.hidden_field :lyrics_mode, value: "write", data: { song_panel_target: "lyricsModeInput" } %>
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-medium">Lyrics</label>
+              <div class="flex items-center gap-1">
+                <button type="button" class="btn btn--borderless text-xs" data-lyrics-mode="auto" data-song-panel-target="autoLyricsButton" data-action="song-panel#selectLyricsMode">Auto</button>
+                <button type="button" class="btn btn--secondary text-xs" data-lyrics-mode="write" data-song-panel-target="writeLyricsButton" data-action="song-panel#selectLyricsMode">Write</button>
+              </div>
+            </div>
+            <%= form.text_area :lyrics,
+                  placeholder: "Add your own lyrics here",
+                  class: "input bg-shade border-subtle",
+                  style: "min-block-size: 160px; resize: none;",
+                  data: { song_panel_target: "lyricsField" } %>
+          </div>
+          <div class="flex items-center justify-between">
+            <label for="instrumental_custom" class="text-sm font-medium">Instrumental</label>
+            <%= form.check_box :instrumental, { id: "instrumental_custom", class: "switch", role: "switch" } %>
+          </div>
+          <div class="flex flex-col gap-2">
+            <%= form.label :prompt, "Styles", class: "text-sm font-medium" %>
+            <%= form.text_area :prompt,
+                  placeholder: "Enter style tags...",
+                  class: "input bg-shade border-subtle",
+                  style: "min-block-size: 60px; resize: none;",
+                  data: { song_panel_target: "styleField" } %>
+            <div class="flex flex-wrap gap-2 pbe-2">
+              <% @categories.each do |category| %>
+                <button type="button" class="badge badge--secondary cursor-pointer" data-tag="<%= category.name %>" data-action="song-panel#addStyleTag">
+                  <%= category.name %>
+                </button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# The sticky footer with the `mbs-auto` class to push it to the bottom. %>
+  <div class="mbs-auto border-bs border-subtle p-4">
+    <%= form.button class: "btn i-full font-medium text-white", style: "background: linear-gradient(to right, var(--orange-500), var(--pink-500));", data: { song_panel_target: "submitButton" } do %>
+      <span class="icon icon--loading animate-spin hidden" data-song-panel-target="spinnerIcon" aria-hidden="true"></span>
+      <span class="icon icon--music" data-song-panel-target="musicIcon" aria-hidden="true"></span>
+      <span class="mis-2" data-song-panel-target="submitButtonText">Create</span>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,78 @@
+<%# The main container for the page %>
+<div class="p-4 sm:p-8">
+
+  <%# Page Header %>
+  <div class="flex justify-between items-center mbe-8">
+    <h1 class="font-bold text-4xl">All Songs</h1>
+    <%= link_to "Create New Song", new_song_path, class: "btn btn--primary" %>
+  </div>
+
+  <%# A container for the list of songs %>
+  <div class="flex flex-col gap-8">
+    <% if @songs.any? %>
+      <%# Loop through each song and display its attributes in a simple card %>
+      <% @songs.each do |song| %>
+        <div class="bg-surface border border-subtle rounded-lg p-6">
+          
+          <div class="flex items-baseline gap-4 mbe-4">
+            <h2 class="font-semibold text-2xl"><%= song.title %></h2>
+            <span class="badge"><%= song.status.humanize %></span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-sm font-mono">
+            <%# --- IMPORTANT ATTRIBUTES --- %>
+            <p><strong>ID:</strong> <%= song.id %></p>
+            <p><strong>User:</strong> <%= song.user.name %> (<%= song.user.email %>)</p>
+            <p><strong>Created At:</strong> <%= song.created_at.to_fs(:long) %></p>
+            <p><strong>Instrumental:</strong> <%= song.instrumental %></p>
+            
+            <%# --- S3 KEYS --- %>
+            <div class="col-span-full mbs-2">
+              <p><strong>S3 Key (Audio):</strong> <%= song.s3_key || "Not available" %></p>
+              <p><strong>S3 Key (Thumbnail):</strong> <%= song.thumbnail_s3_key || "Not available" %></p>
+            </div>
+            
+            <%# ======================================================= %>
+            <%# === NEWLY ADDED CATEGORIES SECTION ==================== %>
+            <%# ======================================================= %>
+            <% if song.categories.any? %>
+              <div class="col-span-full mbs-2">
+                <div class="flex items-center gap-2">
+                  <p><strong>Categories:</strong></p>
+                  <% song.categories.each do |category| %>
+                    <span class="badge badge--secondary"><%= category.name.capitalize %></span>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+
+            <%# --- CREATIVE INPUTS (Only show if present) --- %>
+            <div class="col-span-full mbs-2">
+              <% if song.full_described_song.present? %>
+                <p class="mbe-2"><strong>Full Description:</strong></p>
+                <p class="p-2 bg-shade rounded-md"><%= song.full_described_song %></p>
+              <% end %>
+              
+              <% if song.prompt.present? %>
+                <p class="mbe-2"><strong>Prompt (Styles):</strong></p>
+                <p class="p-2 bg-shade rounded-md"><%= song.prompt %></p>
+              <% end %>
+
+              <% if song.lyrics.present? %>
+                <p class="mbs-4 mbe-2"><strong>Lyrics:</strong></p>
+                <pre class="p-2 bg-shade rounded-md whitespace-pre-wrap"><%= song.lyrics %></pre>
+              <% end %>
+
+              <% if song.described_lyrics.present? %>
+                <p class="mbs-4 mbe-2"><strong>Described Lyrics:</strong></p>
+                <p class="p-2 bg-shade rounded-md"><%= song.described_lyrics %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-subtle">No songs have been created yet.</p>
+    <% end %>
+  </div>
+</div>

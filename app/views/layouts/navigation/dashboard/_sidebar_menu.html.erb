@@ -2,16 +2,16 @@
   <%# -- TOP AND MIDDLE SECTIONS -- %>
   <%= link_to root_path, class: "flex items-center gap mis-1 mbe-3", style: "--icon-size: 2rem" do %>
     <span class="icon icon--boom-box" aria-hidden="true"></span>
-    <span class="font-bold text-3xl">CQuence AI</span>
+    <span class="font-bold text-4xl">CQuence</span>
   <% end %>
 
   <div class="sidebar-menu__content">
      <div class="sidebar-menu__group">
       <div class="sidebar-menu__items">  
         <nav class="">
-          <%= link_to songs_path, 
+          <%= link_to root_path, 
                       class: "btn sidebar-menu__button mbe-1", 
-                      aria: (current_page?(songs_path) ? { current: "page" } : {}) do %>
+                      aria: (current_page?(root_path) ? { current: "page" } : {}) do %>
             <span class="icon icon--home" aria-hidden="true"></span>
             Home
           <% end %>

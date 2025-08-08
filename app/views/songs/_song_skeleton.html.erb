@@ -1,0 +1,26 @@
+<%# app/views/songs/_song_skeleton.html.erb %>
+<div>
+  <%# Matches the <button class="card-image-wrapper mbe-2"> %>
+  <div class="mbe-2">
+    <div class="relative">
+      <%# CORRECTED: Matches the .album-art aspect-ratio: 1 / 1 %>
+      <div class="skeleton block album-art rounded-md"></div>
+    </div>
+  </div>
+  
+  <%# Matches the text content below the image %>
+  <%# Matches <p class="text-base font-semibold ..."> %>
+  <div class="skeleton" style="height: var(--size-4); width: 90%; margin-bottom: 0.25rem;"></div>
+  
+  <%# Matches <p class="text-sm text-subtle mbe-1"> %>
+  <div class="skeleton" style="height: var(--size-3); width: 60%; margin-bottom: var(--size-1);"></div>
+
+  <%# Matches the container for listen/like counts %>
+  <div class="flex items-center justify-between gap-1">
+    <%# Matches <p> for listen count %>
+    <div class="skeleton" style="height: var(--size-3); width: 40%;"></div>
+    
+    <%# Matches <div> for like count %>
+    <div class="skeleton" style="height: var(--size-3); width: 30%;"></div>
+  </div>
+</div>

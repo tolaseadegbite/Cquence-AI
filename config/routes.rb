@@ -56,17 +56,20 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :songs, only: [:index, :new, :create] do
+  resources :songs, only: [ :index, :new, :create ] do
     member do
       get :play_url
       patch :toggle_publish
     end
     get :track_list, on: :collection
+    get :grid, on: :collection
   end
 
-  get "/dashboard", to: "dashboard#index"
+  resource :dashboard, only: [ :show ], controller: "dashboard" do
+    get :published_songs, on: :collection
+  end
+
   get "/settings", to: "home#index"
-  get "/dashboard", to: "dashboard#index"
   get "/pricing", to: "pages#pricing"
   get "/help", to: "pages#help"
   get "/about", to: "pages#about"

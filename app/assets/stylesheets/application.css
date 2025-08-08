@@ -26,6 +26,10 @@
   min-block-size: 80dvh; /* 100vh = 80% of the viewport height */
 }
  
+.min-b-screen-60 {
+  min-block-size: 60dvh; /* 100vh = 80% of the viewport height */
+}
+ 
 .min-b-screen-90, .fixed-right-col {
   min-block-size: 90dvh; /* 90vh = 90% of the viewport height */
 }
@@ -219,4 +223,21 @@ button.card-image-wrapper {
 
 .processed-track-group:hover .overlay {
   opacity: 1;
+}
+
+/* loader */
+
+.loader-overlay {
+  position: absolute;
+  inset: 0; /* A modern shorthand for top: 0, right: 0, bottom: 0, left: 0 */
+  
+  /* Using your theme's background color with transparency creates a great look. */
+  /* This assumes your --color-bg is something like "18 18 18". If it's "#121212", this won't work. */
+  /* A safe fallback is a hardcoded value. */
+  background-color: rgba(18, 18, 18, 0.7); /* Fallback */
+  background-color: rgba(var(--color-bg-rgb, 18 18 18) / 0.7);
+
+  z-index: 50; /* Ensure it's on top of the content */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }

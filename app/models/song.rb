@@ -43,4 +43,43 @@ class Song < ApplicationRecord
       errors.add(:base, "Song must have a description, style tags with description or lyrics with style tags.")
     end
   end
+
+  def self.new_from_params_and_user(params, user)
+    mode = params.fetch(:mode)
+    lyrics_mode = params.fetch(:lyrics_mode)
+
+    # We can use 'params' directly here, no need for another 'slice'.
+    attributes = build_song_attributes(params, mode, lyrics_mode)
+    title = generate_title_from_params(params, mode, lyrics_mode)
+
+    user.songs.new(attributes.merge(title: title, status: :pending))
+  end
+
+  private_class_method
+
+  def self.build_song_attributes(params, mode, lyrics_mode)
+    if mode == "simple"
+      params.slice(:full_described_song, :instrumental)
+    else # Custom mode
+      if lyrics_mode == "write"
+        params.slice(:prompt, :lyrics, :instrumental)
+      else # Auto-lyrics mode
+        params.slice(:prompt, :instrumental).merge(described_lyrics: params[:lyrics])
+      end
+    end
+  end
+
+  def self.generate_title_from_params(params, mode, lyrics_mode)
+    source_text = "Untitled Song"
+
+    if mode == "simple" && params[:full_described_song].present?
+      source_text = params[:full_described_song]
+    elsif mode == "custom" && lyrics_mode == "auto" && params[:lyrics].present?
+      source_text = params[:lyrics]
+    elsif mode == "custom" && params[:prompt].present?
+      source_text = params[:prompt]
+    end
+
+    source_text.truncate(100).capitalize
+  end
 end

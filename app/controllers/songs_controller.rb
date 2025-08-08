@@ -6,25 +6,22 @@ class SongsController < DashboardController
     "Lo-fi hip hop", "Driving rock anthem", "Summer beach vibe"
   ].freeze
 
+  before_action :set_shared_form_data, only: [ :new, :create ]
+
   def index
+  end
+
+  def grid
+    sleep 1 if Rails.env.development?
     @songs = Song.processed.order(created_at: :desc).includes(:user, :categories)
   end
 
   def new
     @song = Song.new
-    @categories = Category.order(:name)
-    @inspiration_tags = INSPIRATION_TAGS
-    # @user_songs = current_user.songs.order(created_at: :desc)
   end
 
   def create
-    mode = params.require(:song).fetch(:mode)
-    lyrics_mode = params.require(:song).fetch(:lyrics_mode)
-    permitted_params = song_params
-    attributes = build_song_attributes(permitted_params, mode, lyrics_mode)
-    title = generate_title_from_params(permitted_params, mode, lyrics_mode)
-
-    @song = current_user.songs.new(attributes.merge(title: title, status: :pending))
+    @song = Song.new_from_params_and_user(song_params, current_user)
 
     if @song.save
       GenerateSongJob.perform_later(@song)
@@ -32,11 +29,7 @@ class SongsController < DashboardController
 
       @new_song = Song.new
 
-      @categories = Category.order(:name)
-      @inspiration_tags = INSPIRATION_TAGS
     else
-      @categories = Category.order(:name)
-      @inspiration_tags = INSPIRATION_TAGS
       render :new, status: :unprocessable_entity
     end
   end
@@ -63,14 +56,8 @@ class SongsController < DashboardController
   end
 
   def track_list
-    # Get the song DOM IDs sent from the Stimulus controller.
     song_dom_ids = params.fetch(:song_ids, [])
-
-    # Extract the numeric IDs from the DOM IDs (e.g., "song_123" -> "123").
     song_ids = song_dom_ids.map { |dom_id| dom_id.split("_").last }
-
-    # Find all songs for the current user that match these specific IDs.
-    # This is secure because it's scoped to `current_user`.
     @songs_to_refresh = current_user.songs.where(id: song_ids)
   end
 
@@ -81,34 +68,14 @@ class SongsController < DashboardController
       :full_described_song,
       :instrumental,
       :lyrics,
-      :prompt
+      :prompt,
+      :mode,
+      :lyrics_mode
     )
   end
 
-  def build_song_attributes(params, mode, lyrics_mode)
-    if mode == "simple"
-      params.slice(:full_described_song, :instrumental)
-    else # Custom mode
-      if lyrics_mode == "write"
-        params.slice(:prompt, :lyrics, :instrumental)
-      else # Auto-lyrics mode
-        params.slice(:prompt, :instrumental).merge(described_lyrics: params[:lyrics])
-      end
-    end
-  end
-
-  # Generates a clean, capitalized title from the most relevant user input.
-  def generate_title_from_params(params, mode, lyrics_mode)
-    source_text = "Untitled Song"
-
-    if mode == "simple" && params[:full_described_song].present?
-      source_text = params[:full_described_song]
-    elsif mode == "custom" && lyrics_mode == "auto" && params[:lyrics].present?
-      source_text = params[:lyrics]
-    elsif mode == "custom" && params[:prompt].present?
-      source_text = params[:prompt]
-    end
-
-    source_text.truncate(100).capitalize
+  def set_shared_form_data
+    @categories = Category.order(:name)
+    @inspiration_tags = INSPIRATION_TAGS
   end
 end

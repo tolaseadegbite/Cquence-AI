@@ -1,7 +1,12 @@
 class DashboardController < ApplicationController
   layout "dashboard"
 
-  def index
-    @songs = Song.processed.order(created_at: :desc).includes(:user)
+  def show
+  end
+
+  def published_songs
+    sleep 1 if Rails.env.development?
+
+    @songs = Song.where(published: true).processed.order(created_at: :desc).includes(:user)
   end
 end

@@ -1,0 +1,5 @@
+<% @songs_to_refresh.each do |song| %>
+  <%= turbo_stream.replace song do %>
+    <%= render partial: "songs/track_status", locals: { song: song } %>
+  <% end %>
+<% end %>

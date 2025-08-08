@@ -61,6 +61,7 @@ Rails.application.routes.draw do
       get :play_url
       patch :toggle_publish
     end
+    get :track_list, on: :collection
   end
 
   get "/dashboard", to: "dashboard#index"

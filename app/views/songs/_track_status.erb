@@ -1,6 +1,5 @@
-<%# app/views/songs/_track_status.html.erb %>
 <%= tag.div(
-  class: "track-item",
+  class: "track-item #{'is-generating' if song.pending? || song.processing?}",
   id: dom_id(song)
 ) do %>
   <% case song.status %>
@@ -31,9 +30,9 @@
       <div class="bg-shade flex items-center justify-center shrink-0 rounded-md" style="block-size: 3rem; inline-size: 3rem;">
         <span class="icon icon--loading animate-spin text-subtle" style="font-size: 1.5rem;"></span>
       </div>
-      <div class="min-i-0 grow">
-        <h3 class="text-subtle overflow-ellipsis text-sm font-medium"><%= song.title %> (<%= song.status.humanize %>...)</h3>
-        <p class="text-subtle overflow-ellipsis text-xs">This will update automatically when complete.</p>
+      <div class="min-i-0 grow" style="max-inline-size: 35ch;">
+        <h3 class="text-subtle overflow-ellipsis font-medium"><%= song.title %> (<%= song.status.humanize %>...)</h3>
+        <p class="text-subtle overflow-ellipsis text-sm">This will update automatically when complete.</p>
       </div>
     </div>
 
@@ -61,7 +60,7 @@
           </div>
         </button>
         
-        <div class="min-i-0 grow" style="max-inline-size: 30ch;">
+        <div class="min-i-0 grow" style="max-inline-size: 35ch;">
           <h3 class="font-medium"><%= song.title %></h3>
           <p class="text-subtle overflow-ellipsis text-sm"><%= song.prompt %></p>
         </div>

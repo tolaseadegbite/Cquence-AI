@@ -62,6 +62,18 @@ class SongsController < DashboardController
     )
   end
 
+  def track_list
+    # Get the song DOM IDs sent from the Stimulus controller.
+    song_dom_ids = params.fetch(:song_ids, [])
+
+    # Extract the numeric IDs from the DOM IDs (e.g., "song_123" -> "123").
+    song_ids = song_dom_ids.map { |dom_id| dom_id.split("_").last }
+
+    # Find all songs for the current user that match these specific IDs.
+    # This is secure because it's scoped to `current_user`.
+    @songs_to_refresh = current_user.songs.where(id: song_ids)
+  end
+
   private
 
   def song_params

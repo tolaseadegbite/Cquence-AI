@@ -5,19 +5,19 @@
       <%= text_field_tag "actor_field", nil, placeholder: "Search your creations" %>
     </label>
 
-    <%= link_to "#", class: "btn btn--icon btn-primary" do %>
+    <%= button_tag type: "button", 
+                   class: "btn btn--icon btn-primary", 
+                   data: { track_list_target: "refreshButton" } do %>
       <span class="icon icon--refresh-ccw text-subtle" aria-hidden="true"></span>
       Refresh
     <% end %>
   </div>
 
-  <div id="track_list" class="mbs-4 grow overflow-y-auto" data-track-list-target="listContainer">
-    <%= render partial: "songs/track_status", collection: songs, as: :song %>
-    
-    <div id="empty_state" class="flex flex-col items-center justify-center p-10 text-center" data-track-list-target="emptyState">
+  <div id="track_list" class="mbs-4 grow overflow-y-auto">
+    <div id="empty_state" class="flex flex-col items-center justify-center p-10 text-center">
       <span class="icon icon--music text-subtle" style="--icon-size: 2.5rem"></span>
       <h2 class="mbs-4 text-lg font-semibold">No Music Yet</h2>
-      <p class="text-subtle mbs-1" data-track-list-target="emptyStateText">Create a song to see its progress.</p>
+      <p class="text-subtle mbs-1">Create a song to see its progress.</p>
     </div>
   </div>
 </div>

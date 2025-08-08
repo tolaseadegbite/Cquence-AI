@@ -25,7 +25,7 @@ export default class extends Controller {
     // This guard is now redundant if the button is disabled, but is harmless.
     if (this.isLoading) { return }
 
-    const generatingItems = this.element.querySelectorAll('.is-generating')
+    const generatingItems = this.element.querySelectorAll('.is-generating, .is-failed, .has-error')
     if (generatingItems.length === 0) { return }
 
     const songIds = Array.from(generatingItems).map(item => item.id)

@@ -34,6 +34,15 @@ class SongsController < DashboardController
     end
   end
 
+  def update
+    @song = current_user.songs.find(params[:id])
+    if @song.update(song_params)
+      render turbo_stream: turbo_stream.replace(@song, partial: "songs/track_status", locals: { song: @song })
+    else
+      render turbo_stream: turbo_stream.update("flash_messages", partial: "layouts/shared/flash", locals: { flash: { alert: "Could not rename song." }})
+    end
+  end
+
   def play_url
     song = current_user.songs.find(params[:id])
     song.increment!(:listen_count)
@@ -65,6 +74,7 @@ class SongsController < DashboardController
 
   def song_params
     params.require(:song).permit(
+      :title,
       :full_described_song,
       :instrumental,
       :lyrics,

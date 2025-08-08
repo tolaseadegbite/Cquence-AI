@@ -56,7 +56,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :songs, only: [ :index, :new, :create ] do
+  resources :songs, only: [ :index, :new, :create, :update ] do
     member do
       get :play_url
       patch :toggle_publish

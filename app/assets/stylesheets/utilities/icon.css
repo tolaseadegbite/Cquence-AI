@@ -48,6 +48,7 @@ img.icon {
 .icon--car { --svg: url("car.svg"); }
 .icon--volume-2 { --svg: url("volume-2.svg"); }
 .icon--trees { --svg: url("trees.svg"); }
+.icon--pencil { --svg: url("pencil.svg"); }
 .icon--search { --svg: url("search.svg"); }
 .icon--speech { --svg: url("speech.svg"); }
 .icon--rocket { --svg: url("rocket.svg"); }

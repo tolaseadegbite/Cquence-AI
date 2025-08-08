@@ -1,0 +1,18 @@
+<div contents data-controller="popover" data-popover-placement-value="bottom-start">
+  <button type="button" class="cursor-pointer" data-popover-target="trigger" popovertarget="<%= dom_id(song, 'popover') %>" aria-haspopup="true">
+    <span class="icon icon--ellipsis cursor-pointer" style="--icon-size: 1.5rem;"></span>
+  </button>
+
+  <div popover id="<%= dom_id(song, 'popover') %>" class="popover" style="--popover-size: 8rem;" data-popover-target="content" role="menu" aria-label="Menu">
+    <div class="menu" data-controller="menu" data-action="keydown->menu#navigate">
+      
+      <%= link_to presigned_s3_url(song.s3_key), class: "btn menu__item", data: { menu_target: "item" }, role: "menuitem", download: "#{song.title}.mp3" do %>
+        <span class="icon icon--download"></span>
+        Download
+      <% end %>
+
+      <%= render "songs/edit_dialog", song: song %>
+
+    </div>
+  </div>
+</div>

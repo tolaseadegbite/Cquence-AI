@@ -1,0 +1,28 @@
+<div contents data-controller="dialog">
+  <button type="button" class="flex menu__item gap-3 btn" data-menu-target="item" data-action="dialog#showModal" role="menuitem">
+    <span class="icon icon--pencil"></span>
+    Rename
+  </button>
+
+  <%# The dialog modal itself %>
+  <dialog class="dialog" data-dialog-target="content" role="alertdialog" aria-labelledby="dialog_label_<%= dom_id(song) %>" aria-describedby="dialog_desc_<%= dom_id(song) %>">
+    <div class="dialog__content" style="inline-size: 25rem;">
+      <h2 class="text-lg font-semibold leading-none mbe-2" id="dialog_label_<%= dom_id(song) %>">Rename Song</h2>
+      <p class="text-sm text-subtle mbe-4" id="dialog_desc_<%= dom_id(song) %>">
+        Enter a new name for your song. Click save when you are done.
+      </p>
+
+      <%= form_with model: song, class: "bg-main flex flex-col gap-5 i-full" do |form| %>
+        <div class="flex flex-col gap-2">
+          <%= form.label :title, "Title", class: "text-sm font-medium" %>
+          <%= form.text_field :title, placeholder: "Song title...", class: "input bg-shade border-subtle" %>
+        </div>
+
+        <div class="flex items-center justify-end gap-2">
+          <button type="button" class="btn" data-action="click->dialog#close">Cancel</button>
+          <%= form.submit "Save Changes", class: "btn btn--primary" %>
+        </div>
+      <% end %>
+    </div>
+  </dialog>
+</div>

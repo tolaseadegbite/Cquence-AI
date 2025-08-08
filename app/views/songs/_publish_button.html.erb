@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "song_#{song.id}_publish_button" do %>
+  <%= button_to song.published? ? "Unpublish" : "Publish",
+        toggle_publish_song_path(song),
+        method: :patch,
+        class: "btn text-sm #{'btn--negative-outline' if song.published?}",
+        data: { turbo_frame: "_self" } %>
+<% end %>

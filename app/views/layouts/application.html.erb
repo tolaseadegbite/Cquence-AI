@@ -30,11 +30,10 @@
 
   <body class="<%= 'min-b-screen flex flex-col justify-center items-center p-4' if auth_pages %> bg-main" data-controller="color-scheme">
 
-    <% if notice.present? %>
-      <div popover class="flash flash--positive" style="z-index: 9999;" data-controller="element-removal" data-action="animationend->element-removal#remove" role="status"><%= notice %></div>
-    <% elsif alert.present? %>
-      <div popover class="flash flash--negative" data-controller="element-removal" data-action="animationend->element-removal#remove" role="alert"><%= alert %></div>
-    <% end %>
+    <div id="flash_messages">
+      <%# Now we just render the partial %>
+      <%= render "layouts/shared/flash" %>
+    </div>
 
 
     <% if controller_name == 'pages' %>

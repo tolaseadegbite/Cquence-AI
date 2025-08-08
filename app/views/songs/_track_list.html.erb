@@ -1,0 +1,23 @@
+<div class="flex flex-col grow i-full b-full bg-main" data-controller="track-list">
+  <div class="flex justify-between items-center gap-2">
+    <label class="input input--actor flex items-center" style="max-inline-size: 30rem;">
+      <span class="icon icon--search text-subtle mie-2" aria-hidden="true"></span>
+      <%= text_field_tag "actor_field", nil, placeholder: "Search your creations" %>
+    </label>
+
+    <%= link_to "#", class: "btn btn--icon btn-primary" do %>
+      <span class="icon icon--refresh-ccw text-subtle" aria-hidden="true"></span>
+      Refresh
+    <% end %>
+  </div>
+
+  <div id="track_list" class="mbs-4 grow overflow-y-auto" data-track-list-target="listContainer">
+    <%= render partial: "songs/track_status", collection: songs, as: :song %>
+    
+    <div id="empty_state" class="flex flex-col items-center justify-center p-10 text-center" data-track-list-target="emptyState">
+      <span class="icon icon--music text-subtle" style="--icon-size: 2.5rem"></span>
+      <h2 class="mbs-4 text-lg font-semibold">No Music Yet</h2>
+      <p class="text-subtle mbs-1" data-track-list-target="emptyStateText">Create a song to see its progress.</p>
+    </div>
+  </div>
+</div>

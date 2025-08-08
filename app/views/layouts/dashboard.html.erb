@@ -24,16 +24,11 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-main" data-controller="color-scheme">
-    <%# --- This layout is for SIGNED-IN users --- %>
+  <body class="bg-main" data-controller="color-scheme player" data-action="show@window->player#show">
 
-    <% if notice.present? %>
-      <div popover class="flash flash--positive" style="z-index: 9999;" data-controller="element-removal" data-action="animationend->element-removal#remove" role="status"><%= notice %></div>
-    <% elsif alert.present? %>
-      <div popover class="flash flash--negative" data-controller="element-removal" data-action="animationend->element-removal#remove" role="alert"><%= alert %></div>
-    <% end %>
-
-    <%#= render "layouts/navigation/navbar" %>
+    <div id="flash_messages">
+      <%= render "layouts/shared/flash" %>
+    </div>
 
     <div class="sidebar-layout">
       <aside id="sidebar">
@@ -42,12 +37,15 @@
 
       <main id="main" style="padding: 0 !important; gap: 0">
         <div class="header-layout">
-            <header class="" id="header">
-                <%= render "layouts/navigation/dashboard/mobile_menu" %>
-                <%= render "layouts/navigation/dashboard/header_menu" %>
-            </header>
-            <%= yield %>
+          <header class="" id="header">
+            <%= render "layouts/navigation/dashboard/mobile_menu" %>
+            <%= render "layouts/navigation/dashboard/header_menu" %>
+          </header>
+          <%= yield %>
+          </div>
       </main>
     </div>
+
+    <%= render "layouts/shared/player" %>
   </body>
 </html>

@@ -19,9 +19,9 @@
     min-block-size: 90dvh;
   }
 
-  .main-wrapper {
+  /* .main-wrapper {
     padding: var(--size-4);
-  }
+  } */
 }
 
 /* Hides element on screens Less than 64rem */
@@ -30,9 +30,9 @@
     padding: 4dvh 3dvh 0;
   }
 
-  .main-wrapper {
+  /* .main-wrapper {
     padding: var(--size-4);
-  }
+  } */
   
 }
 

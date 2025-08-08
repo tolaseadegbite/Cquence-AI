@@ -1,0 +1,75 @@
+<%# app/views/songs/_track_status.html.erb %>
+<%= tag.div(
+  class: "track-item",
+  id: dom_id(song)
+) do %>
+  <% case song.status %>
+  <% when "failed" %>
+    <div class="flex items-center gap p-3 rounded-lg bg-red-100" style="cursor: not-allowed;">
+      <div class="flex items-center justify-center shrink-0 rounded-md" style="block-size: 3rem; inline-size: 3rem;">
+        <span class="icon icon--circle-alert text-negative" style="font-size: 1.5rem;"></span>
+      </div>
+      <div class="min-i-0 grow">
+        <h3 class="text-negative overflow-ellipsis text-sm font-medium">Generation Failed</h3>
+        <p class="text-subtle overflow-ellipsis text-xs">There was a technical issue. Please try again.</p>
+      </div>
+    </div>
+
+  <% when "no_credits" %>
+    <div class="flex items-center gap p-3 rounded-lg bg-yellow-100" style="cursor: not-allowed;">
+      <div class="flex items-center justify-center shrink-0 rounded-md" style="block-size: 3rem; inline-size: 3rem;">
+        <span class="icon icon--circle-alert text-amber-600" style="font-size: 1.5rem;"></span>
+      </div>
+      <div class="min-i-0 grow">
+        <h3 class="text-amber-800 overflow-ellipsis text-sm font-medium">Not Enough Credits</h3>
+        <p class="text-subtle overflow-ellipsis text-xs">Please purchase more credits to generate more songs.</p>
+      </div>
+    </div>
+
+  <% when "pending", "processing" %>
+    <div class="flex items-center gap p-3 rounded-lg" style="cursor: not-allowed;">
+      <div class="bg-shade flex items-center justify-center shrink-0 rounded-md" style="block-size: 3rem; inline-size: 3rem;">
+        <span class="icon icon--loading animate-spin text-subtle" style="font-size: 1.5rem;"></span>
+      </div>
+      <div class="min-i-0 grow">
+        <h3 class="text-subtle overflow-ellipsis text-sm font-medium"><%= song.title %> (<%= song.status.humanize %>...)</h3>
+        <p class="text-subtle overflow-ellipsis text-xs">This will update automatically when complete.</p>
+      </div>
+    </div>
+
+  <% when "processed" %>
+    <div class="flex items-center justify-between py-3 px-0 rounded-lg">
+      <div class="flex items-center gap-3">
+        <%# This button now calls the global `player` controller directly. %>
+        <button type="button" style="width: auto;" class="card-image-wrapper shrink-0"
+                data-action="player#show"
+                data-player-url-param="<%= presigned_s3_url(song.s3_key) %>"
+                data-player-title-param="<%= song.title %>"
+                data-player-artist-param="<%= song.user.name %>"
+                data-player-artwork-param="<%= presigned_s3_url(song.thumbnail_s3_key) %>">
+          <div class="relative rounded-md overflow-hidden" style="block-size: 3rem; inline-size: 3rem;">
+            <% if thumbnail_url = presigned_s3_url(song.thumbnail_s3_key) %>
+              <%= image_tag thumbnail_url, class: "b-full i-full object-cover", alt: song.title %>
+            <% else %>
+              <div class="bg-surface b-full i-full flex items-center justify-center">
+                <span class="icon icon--music text-subtle" style="font-size: 1.5rem;"></span>
+              </div>
+            <% end %>
+            <div class="card-overlay flex items-center justify-center">
+              <span class="icon icon--play text-gray-50" style="--icon-size: 1.5rem"></span>
+            </div>
+          </div>
+        </button>
+        
+        <div class="min-i-0 grow" style="max-inline-size: 30ch;">
+          <h3 class="font-medium"><%= song.title %></h3>
+          <p class="text-subtle overflow-ellipsis text-sm"><%= song.prompt %></p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-half">
+        <%= render "songs/publish_button", song: song %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

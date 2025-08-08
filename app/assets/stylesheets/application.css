@@ -9,9 +9,13 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-industrial);
   line-height: var(--leading-tight);
+} */
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .min-b-screen {
@@ -67,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
   visibility: hidden;
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .card-image-wrapper:hover .card-overlay {
@@ -199,4 +203,20 @@ button.card-image-wrapper {
   background: none;
   text-align: left;
   cursor: pointer;
+}
+
+.min-b-screen-90, .fixed-left-col {
+  min-block-size: 82dvh; /* 82vh = 82% of the viewport height */
+}
+
+.animate-spin {
+  animation: var(--animate-spin);
+}
+
+.processed-track-group:hover {
+  background-color: var(--color-shade);
+}
+
+.processed-track-group:hover .overlay {
+  opacity: 1;
 }

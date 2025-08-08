@@ -17,6 +17,21 @@ class Song < ApplicationRecord
     no_credits: 4
   }
 
+  after_create_commit do
+    broadcast_prepend_to(
+      self.user,
+      target: "track_list",
+      partial: "songs/track_status" # <-- FIX: Use new partial name
+    )
+  end
+
+  after_update_commit do
+    broadcast_replace_to(
+      self.user,
+      partial: "songs/track_status" # <-- FIX: Use new partial name
+    )
+  end
+
   def valid_for_generation
     # The song is valid if it matches any of the three conditions checked by the job.
     is_simple_mode = full_described_song.present?
@@ -25,7 +40,7 @@ class Song < ApplicationRecord
 
     # If none of the conditions are met, add an error to the model.
     unless is_simple_mode || is_custom_write_mode || is_custom_auto_mode
-      errors.add(:base, "Song must have a description, or a prompt with lyrics/described lyrics.")
+      errors.add(:base, "Song must have a description, style tags with description or lyrics with style tags.")
     end
   end
 end

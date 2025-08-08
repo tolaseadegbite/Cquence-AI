@@ -9,16 +9,16 @@
      <div class="sidebar-menu__group">
       <div class="sidebar-menu__items">  
         <nav class="">
-          <%= link_to "", 
+          <%= link_to songs_path, 
                       class: "btn sidebar-menu__button mbe-1", 
-                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+                      aria: (current_page?(songs_path) ? { current: "page" } : {}) do %>
             <span class="icon icon--home" aria-hidden="true"></span>
             Home
           <% end %>
           
-          <%= link_to "", 
+          <%= link_to new_song_path, 
                       class: "btn sidebar-menu__button mbe-1", 
-                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+                      aria: (current_page?(new_song_path) ? { current: "page" } : {}) do %>
             <span class="icon icon--plus" aria-hidden="true"></span>
             Create
           <% end %>
@@ -39,9 +39,9 @@
       <div class="sidebar-menu__group-label">FOR YOU</div>
       <div class="sidebar-menu__items">  
         <nav>
-          <%= link_to "", 
+          <%= link_to songs_path, 
                       class: "btn sidebar-menu__button mbe-1", 
-                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+                      aria: (current_page?(songs_path) ? { current: "page" } : {}) do %>
             <span class="icon icon--home" aria-hidden="true"></span>
             Your songs
           <% end %>

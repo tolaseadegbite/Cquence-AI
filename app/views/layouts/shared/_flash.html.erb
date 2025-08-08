@@ -1,0 +1,5 @@
+<% if notice.present? %>
+  <div popover class="flash flash--positive" style="z-index: 9999;" data-controller="element-removal" data-action="animationend->element-removal#remove" role="status"><%= notice %></div>
+<% elsif alert.present? %>
+  <div popover class="flash flash--negative" data-controller="element-removal" data-action="animationend->element-removal#remove" role="alert"><%= alert %></div>
+<% end %>

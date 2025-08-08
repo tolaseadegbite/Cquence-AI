@@ -2,6 +2,6 @@ class DashboardController < ApplicationController
   layout "dashboard"
 
   def index
-    # Dashboard logic goes here
+    @songs = Song.processed.order(created_at: :desc).includes(:user)
   end
 end

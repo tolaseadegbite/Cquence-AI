@@ -48,6 +48,7 @@ img.icon {
 .icon--car { --svg: url("car.svg"); }
 .icon--volume-2 { --svg: url("volume-2.svg"); }
 .icon--trees { --svg: url("trees.svg"); }
+.icon--search { --svg: url("search.svg"); }
 .icon--speech { --svg: url("speech.svg"); }
 .icon--rocket { --svg: url("rocket.svg"); }
 .icon--users { --svg: url("users.svg"); }
@@ -71,8 +72,10 @@ img.icon {
 .icon--circle-user { --svg: url("circle-user.svg"); }
 .icon--sliders-vertical { --svg: url("sliders-vertical.svg"); }
 .icon--zap { --svg: url("zap.svg"); }
+.icon--pause { --svg: url("pause.svg"); }
 .icon--rotate-ccw { --svg: url("rotate-ccw.svg"); }
 .icon--rotate-cw { --svg: url("rotate-cw.svg"); }
+.icon--refresh-ccw { --svg: url("refresh-ccw.svg"); }
 .icon--app-window { --svg: url("app-window.svg"); }
 .icon--code { --svg: url("code.svg"); }
 .icon--italic { --svg: url("italic.svg"); }

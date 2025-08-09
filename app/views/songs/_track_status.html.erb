@@ -9,7 +9,7 @@
         <span class="icon icon--circle-alert text-negative p-4" style="font-size: 1.5rem;"></span>
       </div>
       <div class="min-i-0 grow">
-        <h3 class="text-negative overflow-ellipsis font-medium">Generation Failed</h3>
+        <h3 class="text-negative overflow-ellipsis">Generation Failed</h3>
         <p class="text-subtle overflow-ellipsis text-sm">There was a technical issue. Please try again.</p>
       </div>
     </div>
@@ -20,7 +20,7 @@
         <span class="icon icon--circle-alert text-negative p-4" style="font-size: 1.5rem;"></span>
       </div>
       <div class="min-i-0 grow">
-        <h3 class="text-negative overflow-ellipsis font-medium">Not Enough Credits</h3>
+        <h3 class="text-negative overflow-ellipsis">Not Enough Credits</h3>
         <p class="text-subtle overflow-ellipsis text-sm">Please purchase more credits to generate more songs.</p>
       </div>
     </div>
@@ -31,7 +31,7 @@
         <span class="icon icon--loading animate-spin text-subtle p-4" style="font-size: 1.5rem;"></span>
       </div>
       <div class="min-i-0 grow" style="max-inline-size: 35ch;">
-        <h3 class="text-subtle overflow-ellipsis font-medium"><%= song.title %> (<%= song.status.humanize %>...)</h3>
+        <h3 class="text-subtle overflow-ellipsis"><%= song.title %> (<%= song.status.humanize %>...)</h3>
         <p class="text-subtle overflow-ellipsis text-sm">This will update automatically when complete.</p>
       </div>
     </div>
@@ -61,7 +61,7 @@
         </button>
         
         <div class="min-i-0 grow" style="max-inline-size: 35ch;">
-          <h3 class="font-medium"><%= song.title %></h3>
+          <h3><%= song.title %></h3>
           <p class="text-subtle overflow-ellipsis text-sm"><%= song.prompt %></p>
         </div>
       </div>

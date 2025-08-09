@@ -1,11 +1,11 @@
 <div class="flex justify-between items-center container" style="max-inline-size: var(--container-width, 77.5rem)">
-  <div class="flex items-center">
+  <div class="flex items-center text-lg">
     <span class="font-semibold"><%= yield(:page_header) || "Dashboard" %></span>
   </div>
 
-  <div class="flex items-center items-center gap">
+  <div class="flex items-center gap">
     <div class="show@md gap">
-      <div class="input input--clearable input--actor flex items-center gap" data-controller="input-clearable">
+      <div class="input input--clearable input--actor flex items-center gap" style="width: 40dvw;" data-controller="input-clearable">
         <%= search_field_tag "input_clearable", nil, placeholder: "Type something", data: { input_clearable_target: "input" } %>
         <button type="button" class="btn btn--plain" data-action="input-clearable#clear">
           <span class="icon icon--x" aria-hidden="true"></span>

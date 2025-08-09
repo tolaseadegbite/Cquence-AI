@@ -1,4 +1,3 @@
-# app/helpers/s3_helper.rb
 module S3Helper
   # Generates a temporary, secure URL for a private object in S3.
   def presigned_s3_url(key, expires_in: 3600)

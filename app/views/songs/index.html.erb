@@ -1,5 +1,7 @@
-<div class="main-wrapper py-5 px-6">
-  <h1 class="text-3xl font-semibold mbe-6">Your Songs</h1>
+<% provide(:title, "Your songs") %>
+<% content_for :page_header, "Your Songs" %>
+
+<div class="main-wrapper py-3 px-4">
   <section class="mbe-10">
     <%= render "layouts/shared/async_loader", frame_id: "songs_grid", src_path: grid_songs_path do %>
       <div class="grid grid-cols-2 grid-cols-3@sm grid-cols-3@md grid-cols-6@lg gap-x-4 gap-y-8">

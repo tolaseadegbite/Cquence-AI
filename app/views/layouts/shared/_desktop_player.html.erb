@@ -1,53 +1,69 @@
-<div class="audio-player flex flex-col show@lg i-full p-2 gap-1">
+<div>
+  <div class="music-player bg-main border-bs border-subtle" data-player-target="player">
+    <div class="i-full b-full flex items-center justify-between">
+      <!-- (Rest of the player HTML is unchanged) -->
 
-  <%# --- START: Always Visible Section --- %>
-  <%# THE FIX: We now have only ONE progress bar container. %>
-  <%# It is a button that always calls the `expand` action. %>
-  <button type="button" class="btn btn--plain i-full progress-bar-container" data-action="click->player-visibility#expand">
-    <div class="flex items-center grow gap-2 min-i-0 progress-bar">
-      <span class="text-xs text-subtle whitespace-nowrap">0:04</span>
-      <div class="relative i-full bg-shade rounded-full" style="block-size: 4px;">
-        <div class="absolute b-full bg-black rounded-full" style="inline-size: 20%;"></div>
+      <!-- =========== Left Section: Now Playing =========== -->
+      <div class="flex items-center gap-3" style="min-width: 180px; width: 30%;">
+        <img src="https://i.scdn.co/image/ab67616d00004851c3a649666568e25c53164993" alt="Album Art" width="56" height="56" class="rounded-md" data-player-target="albumArt">
+        <div class="flex flex-col">
+          <a href="#" class="font-semibold text-white text-sm hover:underline whitespace-nowrap overflow-ellipsis overflow-hidden" data-player-target="songTitle">Song Title</a>
+          <a href="#" class="text-xs text-neutral-400 hover:underline whitespace-nowrap overflow-ellipsis overflow-hidden" data-player-target="songArtist">Artist Name</a>
+        </div>
       </div>
-      <span class="text-xs text-subtle whitespace-nowrap">0:20</span>
-    </div>
-  </button>
-  <%# --- END: Always Visible Section --- %>
 
-
-  <%# Section 2: Collapsible Content %>
-  <div class="flex items-center i-full gap-4" data-player-visibility-target="collapsible">
-    
-    <!-- Left Section: Info -->
-    <div class="flex flex-col shrink-0">
-      <p class="text-sm font-medium whitespace-nowrap overflow-ellipsis" style="max-inline-size: 40ch;">Settle into a comfortable position and gently cl...</p>
-      <div class="flex items-center gap-half text-sm mbs-1">
-        <div class="rounded-full" style="inline-size: 1.25rem; block-size: 1.25rem; background: linear-gradient(180deg, #FDBFDE 0%, #E66FB2 100%);"></div>
-        <span class="text-subtle font-medium">Tolase</span>
-        <span class="text-subtle">·</span>
-        <svg class="text-subtle" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-        <span class="text-subtle">3/23/2025</span>
+      <!-- =========== Center Section: Player Controls =========== -->
+      <div class="flex flex-col items-center justify-center gap-2" style="width: 40%; max-width: 722px;">
+        <div class="flex items-center gap-4">
+          <button type="button" class="player-button" title="Rewind 10s" data-action="click->player#rewind">
+            <span class="icon icon--rotate-ccw text-primary"></span>
+          </button>
+          <button type="button" class="player-button" title="Play" data-action="click->player#togglePlay" data-player-target="toggleButton">
+            <span class="icon icon--play text-primary" style="--icon-size: 2rem" data-player-target="toggleIcon"></span>
+          </button>
+          <button type="button" class="player-button" title="Forward 10s" data-action="click->player#fastForward">
+            <span class="icon icon--rotate-cw text-primary"></span>
+          </button>
+        </div>
+        <div class="flex items-center gap-2 i-full">
+          <span class="text-xs text-neutral-400" style="min-width: 40px; text-align: right;" data-player-target="currentTime">0:00</span>
+          <div class="progress-bar-container grow" data-action="click->player#seek">
+            <div class="progress-bar">
+              <div class="progress-bar-fill" style="width: 0%;" data-player-target="progress">
+                <div class="progress-bar-handle"></div>
+              </div>
+            </div>
+          </div>
+          <span class="text-xs text-neutral-400" style="min-width: 40px;" data-player-target="duration">0:00</span>
+        </div>
       </div>
-    </div>
-    
-    <!-- Middle Section: Player Controls -->
-    <div class="flex items-center grow gap-4 justify-center">
-      <button type="button" class="btn border-0 btn--icon shrink-0 bg-primary rounded-full"><span class="icon icon--rotate-ccw" style="--icon-size: 1.2rem" aria-hidden="true"></span></button>
-      <button class="bg-black text-reversed rounded-full p-2 border-0"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg></button>
-      <button type="button" class="btn border-0 btn--icon shrink-0 bg-primary rounded-full"><span class="icon icon--rotate-cw" style="--icon-size: 1.2rem" aria-hidden="true"></span></button>
-      <div>
-        <span class="text-xs text-subtle whitespace-nowrap">0:04 /</span>
-        <span class="text-xs text-subtle whitespace-nowrap">0:20</span>
-      </div>
-    </div>
-    
-    <!-- Right Section: Actions -->
-    <div class="flex items-center gap-2 shrink-0">
-      <button type="button" class="btn border-0 btn--icon shrink-0 bg-primary rounded-full"><span class="icon icon--history" style="--icon-size: 1.2rem" aria-hidden="true"></span></button>
-      <button type="button" class="btn border-0 btn--icon shrink-0 bg-primary rounded-full" data-action="click->player-visibility#minimize">
-        <span class="icon icon--chevron-down" style="--icon-size: 1.2rem" aria-hidden="true"></span>
-      </button>
-    </div>
 
+      <!-- =========== Right Section: Extra Controls =========== -->
+      <div class="flex items-center justify-end gap-3" style="min-width: 180px; width: 30%;">
+        <div class="flex items-center gap-2" style="width: 125px;">
+          <button type="button" class="player-button" title="Mute" data-action="click->player#toggleMute">
+            <span class="icon icon--volume-2 text-primary" data-player-target="volumeIcon"></span>
+          </button>
+          <div class="progress-bar-container grow" data-action="click->player#setVolume" data-player-target="volumeBarContainer">
+            <div class="progress-bar">
+              <div class="progress-bar-fill" style="width: 75%;" data-player-target="volumeBar">
+                <div class="progress-bar-handle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="player-button" title="Collapse Player" data-action="click->player#collapse">
+          <span class="icon icon--chevron-down text-primary"></span>
+        </button>
+        <button type="button" class="player-button" title="Close Player" data-action="click->player#stop">
+          <span class="icon icon--x text-primary"></span>
+        </button>
+      </div>
+
+    </div>
   </div>
+
+  <button type="button" class="is-hidden fixed bottom-5 right-5 z-50 player-button !bg-surface-raised !p-3 rounded-full shadow-lg" title="Expand Player" data-player-target="collapsedPlayerButton" data-action="click->player#expand">
+    <span class="icon icon--music text-primary" style="--icon-size: 1.5rem"></span>
+  </button>
 </div>

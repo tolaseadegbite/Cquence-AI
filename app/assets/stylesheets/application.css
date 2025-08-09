@@ -1,18 +1,50 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: font-url('roboto/Roboto_Condensed-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
 
-/* h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-industrial);
-  line-height: var(--leading-tight);
-} */
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: font-url('roboto/Roboto_Condensed-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: font-url('roboto/Roboto_Condensed-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: font-url('roboto/Roboto_Condensed-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+h1 {
+  font-weight: 700; /* Maps to Roboto_Condensed-Bold */
+}
+
+h2 {
+  font-weight: 600; /* Maps to Roboto_Condensed-SemiBold */
+}
+
+h3 {
+  font-weight: 500; /* Maps to Roboto_Condensed-Medium */
+}
+
+h4, h5, h6 {
+  font-weight: 400; /* Maps to Roboto_Condensed-Regular */
+}
 
 .cursor-pointer {
   cursor: pointer;
@@ -225,19 +257,11 @@ button.card-image-wrapper {
   opacity: 1;
 }
 
-/* loader */
+.artwork-placeholder {
+  /* A nice lime gradient using your color variables */
+  background-image: linear-gradient(to bottom right, #a3e635, #65a30d);
+}
 
-.loader-overlay {
-  position: absolute;
-  inset: 0; /* A modern shorthand for top: 0, right: 0, bottom: 0, left: 0 */
-  
-  /* Using your theme's background color with transparency creates a great look. */
-  /* This assumes your --color-bg is something like "18 18 18". If it's "#121212", this won't work. */
-  /* A safe fallback is a hardcoded value. */
-  background-color: rgba(18, 18, 18, 0.7); /* Fallback */
-  background-color: rgba(var(--color-bg-rgb, 18 18 18) / 0.7);
-
-  z-index: 50; /* Ensure it's on top of the content */
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+.is-hidden {
+  display: none !important;
 }

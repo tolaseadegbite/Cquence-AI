@@ -1,7 +1,8 @@
-<%# app/views/dashboard/show.html.erb %>
+<% provide(:title, "Dashboard") %>
+<% content_for :page_header, "Dashboard" %>
 
 <div class="main-wrapper py-5 px-6">
-  <h1 class="text-3xl font-semibold mbe-6">Published Songs</h1>
+  <h1 class="text-3xl font-semibold mbe-5">Trending</h1>
 
   <section class="mbe-10">
     <%= render "layouts/shared/async_loader", frame_id: "dashboard_songs_grid", src_path: published_songs_dashboard_path do %>

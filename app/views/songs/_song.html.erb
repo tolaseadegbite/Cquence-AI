@@ -1,20 +1,23 @@
-<div id="song">
+<div id="song-<%= song.id %>">
+    <%# --- MODIFIED: Removed data-player-target, using a plain data-attribute --- %>
     <button type="button" class="card-image-wrapper mbe-2"
             data-action="player#show"
+            data-song-card="true" <%# This is a plain data attribute for easier selection %>
             data-player-url-param="<%= presigned_s3_url(song.s3_key) %>"
             data-player-title-param="<%= song.title %>"
             data-player-artist-param="<%= song.user.name %>"
-            data-player-artwork-param="<%= presigned_s3_url(song.thumbnail_s3_key) %>">
+            data-player-artwork-param="<%= presigned_s3_url(song.thumbnail_s3_key) %>"
+            data-song-url="<%= presigned_s3_url(song.s3_key) %>">
         <div class="relative">
             <% if thumbnail_url = presigned_s3_url(song.thumbnail_s3_key) %>
                 <%= image_tag thumbnail_url, alt: song.title, class: "block album-art object-cover rounded-md" %>
             <% else %>
-            <div class="bg-surface block album-art rounded-md flex items-center justify-center">
+            <div class="bg-surface album-art rounded-md flex items-center justify-center">
                 <span class="icon icon--music text-subtle" style="--icon-size: 3rem"></span>
             </div>
             <% end %>
             <div class="card-overlay flex items-center justify-center rounded-md">
-                <span class="icon icon--play text-gray-50" style="--icon-size: 3rem" aria-hidden="true"></span>
+                <span class="icon icon--play text-gray-50" style="--icon-size: 3rem" aria-hidden="true" data-song-icon="true"></span>
             </div>
         </div>
     </button>

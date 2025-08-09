@@ -6,7 +6,7 @@
 
   <%# The dialog modal itself %>
   <dialog class="dialog" data-dialog-target="content" role="alertdialog" aria-labelledby="dialog_label_<%= dom_id(song) %>" aria-describedby="dialog_desc_<%= dom_id(song) %>">
-    <div class="dialog__content" style="inline-size: 25rem;">
+    <div class="dialog__content">
       <h2 class="text-lg font-semibold leading-none mbe-2" id="dialog_label_<%= dom_id(song) %>">Rename Song</h2>
       <p class="text-sm text-subtle mbe-4" id="dialog_desc_<%= dom_id(song) %>">
         Enter a new name for your song. Click save when you are done.

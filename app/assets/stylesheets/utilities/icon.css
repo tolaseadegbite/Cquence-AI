@@ -53,6 +53,8 @@ img.icon {
 .icon--speech { --svg: url("speech.svg"); }
 .icon--rocket { --svg: url("rocket.svg"); }
 .icon--users { --svg: url("users.svg"); }
+.icon--skip-forward { --svg: url("skip-forward.svg"); }
+.icon--skip-back { --svg: url("skip-back.svg"); }
 .icon--wind { --svg: url("wind.svg"); }
 .icon--door-open { --svg: url("door-open.svg"); }
 .icon--waves { --svg: url("waves.svg"); }

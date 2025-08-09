@@ -6,7 +6,7 @@
     </label>
   </div>
 
-  <div id="track_list" class="mbs-4 grow overflow-y-auto">
+  <div id="track_list" class="grow overflow-y-auto pie-4">
     <% if songs.any? %>
       <% songs.each do |song| %>
         <%= render "songs/track_status", song: song %>

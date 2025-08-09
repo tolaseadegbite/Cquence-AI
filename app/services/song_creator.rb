@@ -33,14 +33,21 @@ class SongCreator
   end
 
   def generate_title
+    # Priority 1: Use the title from the form if the user provided one.
+    if @params[:title].present?
+      return @params[:title].truncate(100)
+    end
+
+    # Fallback logic (your existing code) if the title is blank.
     source_text = "Untitled Song"
     if @mode == "simple" && @params[:full_described_song].present?
       source_text = @params[:full_described_song]
     elsif @mode == "custom" && @lyrics_mode == "auto" && @params[:lyrics].present?
-      source_text = @params[:lyrics] # The text from the form is used for the title
+      source_text = @params[:lyrics]
     elsif @mode == "custom" && @params[:prompt].present?
       source_text = @params[:prompt]
     end
+
     source_text.truncate(100).capitalize
   end
 end

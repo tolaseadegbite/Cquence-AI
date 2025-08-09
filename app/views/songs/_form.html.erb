@@ -2,7 +2,7 @@
 <% active_lyrics_mode = song.lyrics_mode.presence || 'auto' %>
 
 
-<%= form_with model: song, id: "song_form", class: "bg-main flex flex-col i-full", data: { controller: "song-panel" } do |form| %>
+<%= form_with model: song, id: "song_form", class: "bg-main flex flex-col i-full b-full", data: { controller: "song-panel dirty-form" } do |form| %>
 
   <%# Dynamically set the hidden mode field based on the last used mode. %>
   <%= form.hidden_field :mode, value: active_mode, data: { song_panel_target: "modeInput" } %>
@@ -26,6 +26,11 @@
         </div>
       </div>
     <% end %>
+
+    <div class="flex flex-col gap-2 mbe-6">
+      <%= form.label :title, "Title (optional)", class: "text-sm font-medium" %>
+      <%= form.text_field :title, placeholder: "My Awesome Song", class: "input bg-shade border-subtle" %>
+    </div>
 
     <%# Use the 'active_mode' variable to tell the tabs controller which tab to show on load. %>
     <div class="tabs i-full" data-controller="tabs" data-tabs-initial-index-value="<%= active_mode == 'custom' ? 1 : 0 %>">
@@ -103,7 +108,7 @@
                   class: "input bg-shade border-subtle",
                   style: "min-block-size: 60px; resize: none;",
                   data: { song_panel_target: "styleField" } %>
-            <div class="overflow-x-auto rounded-md border" style="block-size: 10rem;">
+            <div class="overflow-x-auto rounded-md border" style="block-size: 10dvh; min-block-size: 8rem;">
               <div class="p-4">
                 <div class="flex flex-wrap gap-2 pbe-2">
                   <% @categories.each do |category| %>

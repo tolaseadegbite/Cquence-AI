@@ -1,9 +1,14 @@
+<% active_mode = song.mode.presence || 'simple' %>
+<% active_lyrics_mode = song.lyrics_mode.presence || 'auto' %>
+
+
 <%= form_with model: song, id: "song_form", class: "bg-main flex flex-col i-full", data: { controller: "song-panel" } do |form| %>
 
-  <%= form.hidden_field :mode, value: "simple", data: { song_panel_target: "modeInput" } %>
+  <%# Dynamically set the hidden mode field based on the last used mode. %>
+  <%= form.hidden_field :mode, value: active_mode, data: { song_panel_target: "modeInput" } %>
 
   <%# The main content area that grows and becomes scrollable. %>
-  <div class="grow overflow-y-auto p-5"> <%# <-- Note: I've also applied the previous layout fix here %>
+  <div class="grow overflow-y-auto p-5">
 
     <% if @song.errors.any? %>
       <div class="alert alert--negative flex items-start mbe-5" role="alert">
@@ -21,8 +26,9 @@
         </div>
       </div>
     <% end %>
-    
-    <div class="tabs i-full" data-controller="tabs">
+
+    <%# Use the 'active_mode' variable to tell the tabs controller which tab to show on load. %>
+    <div class="tabs i-full" data-controller="tabs" data-tabs-initial-index-value="<%= active_mode == 'custom' ? 1 : 0 %>">
       <div class="tabs__list" role="tablist">
         <button type="button" id="trigger_simple" class="btn tabs__button" data-tabs-target="button" data-action="tabs#select song-panel#setMode" data-mode="simple" role="tab" aria-controls="tab_simple">Simple</button>
         <button type="button" id="trigger_custom" class="btn tabs__button" data-tabs-target="button" data-action="tabs#select song-panel#setMode" data-mode="custom" role="tab" aria-controls="tab_custom">Custom</button>
@@ -40,16 +46,16 @@
                   data: { song_panel_target: "descriptionField" } %>
           </div>
           <div class="flex items-center justify-between">
-            <button type="button" 
-                    class="btn btn--secondary" 
-                    data-action="click->tabs#selectByIndex" 
+            <button type="button"
+                    class="btn btn--secondary"
+                    data-action="click->tabs#selectByIndex"
                     data-tabs-index-param="1">
               <span class="icon icon--plus mie-2" aria-hidden="true"></span>
               Lyrics
             </button>
             <div class="flex items-center gap-2">
               <%= form.label :instrumental_simple, "Instrumentals", class: "text-sm font-medium" %>
-              <%= form.check_box :instrumental, { id: "instrumental_simple", class: "switch", role: "switch" } %>
+              <%= form.check_box :instrumental, { id: "instrumental_simple", class: "cursor-pointer switch", role: "switch" } %>
             </div>
           </div>
           <div class="flex flex-col gap-2">
@@ -67,28 +73,28 @@
 
       <%# === CUSTOM MODE TAB === %>
       <div hidden id="tab_custom" data-tabs-target="tab" role="tabpanel" aria-labelledby="trigger_custom" class="mbs-6">
-        <%# CHANGE 1: Set the default value to "auto" %>
-        <%= form.hidden_field :lyrics_mode, value: "auto", data: { song_panel_target: "lyricsModeInput" } %>
+        <%# Dynamically set the hidden field for the last used lyrics mode. %>
+        <%= form.hidden_field :lyrics_mode, value: active_lyrics_mode, data: { song_panel_target: "lyricsModeInput" } %>
         <div class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
             <div class="flex items-center justify-between">
               <label class="text-sm font-medium">Lyrics</label>
               <div class="flex items-center gap-1">
-                <%# CHANGE 2: Swap the button classes. "auto" is now active. %>
-                <button type="button" class="btn btn--secondary text-xs" data-lyrics-mode="auto" data-song-panel-target="autoLyricsButton" data-action="song-panel#selectLyricsMode">Auto</button>
-                <button type="button" class="btn btn--borderless text-xs" data-lyrics-mode="write" data-song-panel-target="writeLyricsButton" data-action="song-panel#selectLyricsMode">Write</button>
+                <%# Dynamically set the active button style based on the 'active_lyrics_mode' variable. %>
+                <button type="button" class="btn text-xs <%= active_lyrics_mode == 'auto' ? 'btn--secondary' : 'btn--borderless' %>" data-lyrics-mode="auto" data-song-panel-target="autoLyricsButton" data-action="song-panel#selectLyricsMode">Auto</button>
+                <button type="button" class="btn text-xs <%= active_lyrics_mode == 'write' ? 'btn--secondary' : 'btn--borderless' %>" data-lyrics-mode="write" data-song-panel-target="writeLyricsButton" data-action="song-panel#selectLyricsMode">Write</button>
               </div>
             </div>
-            <%# CHANGE 3: Update the placeholder to match the "auto" mode default. %>
+            <%# Dynamically set the placeholder text to match the active lyrics mode. %>
             <%= form.text_area :lyrics,
-                  placeholder: "Describe your lyrics...",
+                  placeholder: (active_lyrics_mode == 'auto' ? 'Describe your lyrics...' : 'Add your own lyrics here'),
                   class: "input bg-shade border-subtle",
                   style: "min-block-size: 160px; resize: none;",
                   data: { song_panel_target: "lyricsField" } %>
           </div>
           <div class="flex items-center justify-between">
             <label for="instrumental_custom" class="text-sm font-medium">Instrumentals</label>
-            <%= form.check_box :instrumental, { id: "instrumental_custom", class: "switch", role: "switch" } %>
+            <%= form.check_box :instrumental, { id: "instrumental_custom", class: "switch cursor-pointer", role: "switch" } %>
           </div>
           <div class="flex flex-col gap-2">
             <%= form.label :prompt, "Styles", class: "text-sm font-medium" %>
@@ -116,7 +122,7 @@
 
   <%# The sticky footer with the `mbs-auto` class to push it to the bottom. %>
   <div class="mbs-auto border-bs border-subtle p-5">
-    <%= form.button class: "btn i-full font-medium text-main bg-lime-500 hover:bg-lime-600", data: { song_panel_target: "submitButton" } do %>
+    <%= form.button class: "btn i-full font-medium text-main bg-rose-500 hover:bg-rose-600", data: { song_panel_target: "submitButton" } do %>
       <span class="icon icon--loading animate-spin hidden" data-song-panel-target="spinnerIcon" aria-hidden="true"></span>
       <span class="icon icon--music" data-song-panel-target="musicIcon" aria-hidden="true"></span>
       <span class="mis-2" data-song-panel-target="submitButtonText">Create</span>

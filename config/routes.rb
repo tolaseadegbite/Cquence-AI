@@ -61,7 +61,6 @@ Rails.application.routes.draw do
       get :play_url
       patch :toggle_publish
     end
-    get :track_list, on: :collection
     get :grid, on: :collection
   end
 

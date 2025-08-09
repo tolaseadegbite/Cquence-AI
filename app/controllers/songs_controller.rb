@@ -18,17 +18,18 @@ class SongsController < DashboardController
 
   def new
     @song = Song.new
+    @songs = current_user.songs.where.not(status: :processed).order(created_at: :desc)
   end
 
   def create
-    @song = Song.new_from_params_and_user(song_params, current_user)
+    @song = SongCreator.new(song_params, current_user).call
 
     if @song.save
       GenerateSongJob.perform_later(@song)
       flash.now[:notice] = "Your song is being generated!"
-
-      @new_song = Song.new
-
+      respond_to do |format|
+        format.turbo_stream
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -62,12 +63,6 @@ class SongsController < DashboardController
       partial: "songs/publish_button",
       locals: { song: @song }
     )
-  end
-
-  def track_list
-    song_dom_ids = params.fetch(:song_ids, [])
-    song_ids = song_dom_ids.map { |dom_id| dom_id.split("_").last }
-    @songs_to_refresh = current_user.songs.where(id: song_ids)
   end
 
   private

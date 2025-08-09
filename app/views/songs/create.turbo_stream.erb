@@ -1,4 +1,2 @@
 <%= turbo_stream.update "flash_messages", partial: "layouts/shared/flash" %>
-<%= turbo_stream.replace "song_form", partial: "songs/form", locals: { song: @new_song } %>
 <%= turbo_stream.remove "empty_state" %>
-<%= turbo_stream.prepend "track_list", partial: "songs/track_status", locals: { song: @song } %>

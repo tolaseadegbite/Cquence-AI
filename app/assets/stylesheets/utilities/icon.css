@@ -46,6 +46,8 @@ img.icon {
 .icon--circle-plus { --svg: url("circle-plus.svg"); }
 .icon--calendar { --svg: url("calendar.svg"); }
 .icon--car { --svg: url("car.svg"); }
+.icon--volume-x { --svg: url("volume-x.svg"); }
+.icon--volume-1 { --svg: url("volume-1.svg"); }
 .icon--volume-2 { --svg: url("volume-2.svg"); }
 .icon--trees { --svg: url("trees.svg"); }
 .icon--pencil { --svg: url("pencil.svg"); }

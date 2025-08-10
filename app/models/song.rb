@@ -25,7 +25,6 @@ class Song < ApplicationRecord
       target: "track_list",
       partial: "songs/track_status"
     )
-    update_floating_status_button
   end
 
   after_update_commit do
@@ -33,11 +32,6 @@ class Song < ApplicationRecord
       self.user,
       partial: "songs/track_status"
     )
-    update_floating_status_button
-  end
-
-  after_destroy_commit do
-    update_floating_status_button
   end
 
   def valid_for_generation
@@ -52,19 +46,5 @@ class Song < ApplicationRecord
     unless is_simple_mode || is_custom_write_mode || is_custom_auto_mode
       errors.add(:base, "You must provide either a full description, or both lyrics and styles, or a lyric description and styles.")
     end
-  end
-
-  private
-
-  def update_floating_status_button
-    # Get all songs that are NOT fully processed yet
-    active_songs = user.songs.where.not(status: :processed)
-
-    broadcast_update_to(
-      self.user,
-      target: "floating_status_button_container",
-      partial: "songs/track_status_sheet",
-      locals: { songs: active_songs }
-    )
   end
 end

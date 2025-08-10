@@ -13,7 +13,7 @@
           <h3 class="text-negative">Generation Failed</h3>
           <h3><%= song.title %></h3>
           <% if song.failed? %>
-            <p class="text-subtle text-sm">There was a technical issue. Please try again or <%= link_to "contact support", "#", class: "text-rose-500" %>.</p>
+            <p class="text-subtle text-sm mbs-2">There was a technical issue. Please try again or <%= link_to "contact support", "#", class: "text-rose-500" %>.</p>
           <% else %>
             <p class="text-negative overflow-ellipsis text-sm">Not enough credits</p>
           <% end %>
@@ -27,17 +27,18 @@
     </div>
 
   <% when "pending", "processing" %>
-    <div class="flex items-center gap py-3 px-0 rounded-lg" style="cursor: not-allowed;">
-      <div class="bg-shade flex items-center justify-center shrink-0 rounded-md" style="block-size: 3rem; inline-size: 3rem;">
-        <span class="icon icon--loading animate-spin text-subtle p-4" style="font-size: 1.5rem;"></span>
-      </div>
-      <div class="min-i-0 grow" style="max-inline-size: 30dvw;">
-        <h3 class="text-subtle overflow-ellipsis"><%= song.title %> (<%= song.status.humanize %>...)</h3>
-        <p class="text-subtle overflow-ellipsis text-sm">This will update automatically when complete.</p>
+    <div class="flex items-center gap py-3 px-0 rounded-lg justify-between" style="cursor: not-allowed;">
+      <div class="flex items-center gap-3">
+        <div class="bg-shade flex items-center justify-center shrink-0 rounded-md" style="block-size: 3rem; inline-size: 3rem;">
+          <span class="icon icon--loading animate-spin text-subtle p-4" style="font-size: 1.5rem;"></span>
+        </div>
+        <div class="min-i-0 grow" style="max-inline-size: 30dvw;">
+          <h3 class="text-subtle overflow-ellipsis"><%= song.title %> (<%= song.status.humanize %>...)</h3>
+          <p class="text-subtle overflow-ellipsis text-sm">This will update automatically when complete.</p>
+        </div>
       </div>
 
-      <div class="flex items-center gap-3">
-        <%= button_to "Retry", "#", method: :post, class: "btn btn--secondary text-xs", title: "Retry generation" %>
+      <div>
         <%= button_to "Delete", song_path(song), method: :delete, class: "btn btn--negative text-xs", title: "Delete song", form: { data: { turbo_confirm: "Are you sure?" } } %>
       </div>
     </div>

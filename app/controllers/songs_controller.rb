@@ -26,7 +26,7 @@ class SongsController < DashboardController
 
     if @song.save
       GenerateSongJob.perform_later(@song)
-      flash.now[:notice] = "Your song is being generated!"
+      flash.now[:notice] = "Your song is being generated! Scroll down to see the status."
       respond_to do |format|
         format.turbo_stream
       end

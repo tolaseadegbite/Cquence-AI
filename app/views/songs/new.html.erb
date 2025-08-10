@@ -9,11 +9,11 @@
   <div class="col-span-4@md flex flex-col overflow-hidden">
     <%= render "form", song: @song %>
     
-    <%= render "songs/track_status_sheet", songs: @songs %>
+    <%#= render "songs/track_status_sheet", songs: @songs %>
   </div>
 
-  <div class="col-span-8@md overflow-hidden show@lg">
-    <div class="bg-main border-is border-subtle p-5 b-full h-full">
+  <div class="col-span-8@md overflow-hidden">
+    <div class="bg-main border-is border-subtle p-5 b-full i-full">
       <%= render "songs/track_list", songs: @songs %>
     </div>
   </div>

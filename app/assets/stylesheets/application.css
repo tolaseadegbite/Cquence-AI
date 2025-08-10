@@ -219,7 +219,7 @@ body.has-player-visible {
 
 .progress-bar-container:hover .progress-bar-handle,
 .progress-bar-container:hover .progress-bar-fill {
-  background-color: #1DB954; /* Spotify Green for hover */
+  background-color: #e11d48; /* Spotify Green for hover */
 }
 .progress-bar-container:hover .progress-bar-handle {
   opacity: 1;

@@ -19,9 +19,9 @@
     min-block-size: 90dvh;
   }
 
-  /* .main-wrapper {
-    padding: var(--size-4);
-  } */
+  .lg-constrained-height {
+    height: calc(100dvh - 4rem);
+  }
 }
 
 /* Hides element on screens Less than 64rem */

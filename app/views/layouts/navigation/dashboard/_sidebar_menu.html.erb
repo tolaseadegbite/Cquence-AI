@@ -42,26 +42,20 @@
           <%= link_to songs_path, 
                       class: "btn sidebar-menu__button mbe-1", 
                       aria: (current_page?(songs_path) ? { current: "page" } : {}) do %>
-            <span class="icon icon--home" aria-hidden="true"></span>
+            <span class="icon icon--music" aria-hidden="true"></span>
             Your songs
           <% end %>
           <%= link_to "", 
                       class: "btn sidebar-menu__button mbe-1", 
                       aria: (current_page?("") ? { current: "page" } : {}) do %>
-            <span class="icon icon--history" aria-hidden="true"></span>
-            History
-          <% end %>
-          <%= link_to "", 
-                      class: "btn sidebar-menu__button mbe-1", 
-                      aria: (current_page?("") ? { current: "page" } : {}) do %>
-            <span class="icon icon--home" aria-hidden="true"></span>
+            <span class="icon icon--list-music" aria-hidden="true"></span>
             Playlists
           <% end %>
           <%= link_to "", 
                       class: "btn sidebar-menu__button mbe-1", 
                       aria: (current_page?("") ? { current: "page" } : {}) do %>
             <span class="icon icon--home" aria-hidden="true"></span>
-            Watch later
+            Listen later
           <% end %>
           <%= link_to "", 
                       class: "btn sidebar-menu__button mbe-1", 
@@ -76,38 +70,50 @@
     <hr class="menu__separator" role="separator"/>
 
     <div class="sidebar-menu__group">
-      <div class="sidebar-menu__group-label">FOR YOU</div>
+      <div class="sidebar-menu__group-label">FOLLOWING UPDATES</div>
       <div class="sidebar-menu__items">  
         <nav>
           <%= link_to "", 
                       class: "btn sidebar-menu__button mbe-1", 
                       aria: (current_page?("") ? { current: "page" } : {}) do %>
-            <span class="icon icon--home" aria-hidden="true"></span>
-            Your musics
+            <%= image_tag "man_1.jpg", size: 32, alt: "User Avatar", class: "rounded-full" %>
+            Denzel Clark
           <% end %>
           <%= link_to "", 
                       class: "btn sidebar-menu__button mbe-1", 
                       aria: (current_page?("") ? { current: "page" } : {}) do %>
-            <span class="icon icon--history" aria-hidden="true"></span>
-            History
+            <%= image_tag "woman_1.jpg", size: 32, alt: "User Avatar", class: "rounded-full" %>
+            Olabisi
           <% end %>
           <%= link_to "", 
                       class: "btn sidebar-menu__button mbe-1", 
                       aria: (current_page?("") ? { current: "page" } : {}) do %>
-            <span class="icon icon--home" aria-hidden="true"></span>
-            Playlists
+            <%= image_tag "woman_2.jpg", size: 32, alt: "User Avatar", class: "rounded-full" %>
+            Ayoade
           <% end %>
           <%= link_to "", 
                       class: "btn sidebar-menu__button mbe-1", 
                       aria: (current_page?("") ? { current: "page" } : {}) do %>
-            <span class="icon icon--home" aria-hidden="true"></span>
-            Watch later
+            <%= image_tag "kitty.jpg", size: 32, alt: "User Avatar", class: "rounded-full" %>
+            Stephie
           <% end %>
           <%= link_to "", 
                       class: "btn sidebar-menu__button mbe-1", 
                       aria: (current_page?("") ? { current: "page" } : {}) do %>
-            <span class="icon icon--heart" aria-hidden="true"></span>
-            Liked musics
+            <%= image_tag "man_2.jpg", size: 32, alt: "User Avatar", class: "rounded-full" %>
+            Maddy
+          <% end %>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <%= image_tag "woman_3.jpg", size: 32, alt: "User Avatar", class: "rounded-full" %>
+            Paulina
+          <% end %>
+          <%= link_to "", 
+                      class: "btn sidebar-menu__button mbe-1", 
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <%= image_tag "robot.png", size: 32, alt: "User Avatar", class: "rounded-full" %>
+            Jojo
           <% end %>
         </nav>
       </div>
@@ -164,7 +170,7 @@
          data-controller="popover" 
          data-popover-placement-value="right-start" 
          data-action="click@window->popover#clickOutside">
-      <%= button_tag type: "button", class: "btn sidebar-menu__button display-md border border border-lime-800", data: { action: "click->popover#toggle", popover_target: "trigger" }, aria: { haspopup: "true" } do %>
+      <%= button_tag type: "button", class: "btn sidebar-menu__button display-md border border-subtle", data: { action: "click->popover#toggle", popover_target: "trigger" }, aria: { haspopup: "true" } do %>
         <div class="flex shrink-0 overflow-hidden rounded-lg">
           <%= image_tag "robot.png", size: 32, alt: "User Avatar" %>
         </div>
@@ -199,5 +205,4 @@
       <%= render "layouts/shared/credits_card" %>
     </div>    
   </div>
-  <%# --- END OF BOTTOM SECTION --- %>
 </div>

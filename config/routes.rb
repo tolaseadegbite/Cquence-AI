@@ -1,3 +1,5 @@
+require "constraints/authenticated_constraint"
+
 Rails.application.routes.draw do
   mount MissionControl::Jobs::Engine, at: "/jobs"
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
@@ -42,6 +44,13 @@ Rails.application.routes.draw do
     resource :passwordless, only: [ :new, :edit, :create ]
     resource :sudo, only: [ :new, :create ]
   end
+
+  constraints Constraints::AuthenticatedConstraint.new do
+    # If the user is logged in (session[:user_id] exists),
+    # the root path will be the dashboard.
+    root "dashboard#show", as: :authenticated_root
+  end
+
   root "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -68,9 +77,9 @@ Rails.application.routes.draw do
     get :published_songs, on: :collection
   end
 
-  get "/settings", to: "home#index"
-  get "/pricing", to: "pages#pricing"
-  get "/help", to: "pages#help"
-  get "/about", to: "pages#about"
-  get "/press", to: "pages#press"
+  get "settings", to: "home#index"
+  get "pricing", to: "pages#pricing"
+  get "help", to: "pages#help"
+  get "about", to: "pages#about"
+  get "press", to: "pages#press"
 end

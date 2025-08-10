@@ -40,7 +40,7 @@ class SongsController < DashboardController
     if @song.update(song_params)
       render turbo_stream: turbo_stream.replace(@song, partial: "songs/track_status", locals: { song: @song })
     else
-      render turbo_stream: turbo_stream.update("flash_messages", partial: "layouts/shared/flash", locals: { flash: { alert: "Could not rename song." }})
+      render turbo_stream: turbo_stream.update("flash_messages", partial: "layouts/shared/flash", locals: { flash: { alert: "Could not rename song." } })
     end
   end
 

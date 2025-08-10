@@ -1,15 +1,8 @@
-# app/jobs/generate_song_job.rb
 class GenerateSongJob < ApplicationJob
-  # This correctly assigns the job to the dedicated queue.
   queue_as :song_generation
 
-  # === CORRECT CONCURRENCY CONTROL (From the Official Docs) ===
-  # This uses Solid Queue's built-in concurrency controls to ensure that
-  # only one job with the same key (the user's ID) is running at a time.
   limits_concurrency to: 1, key: ->(song) { song.user_id }, duration: 10.minutes
 
-  # This block will handle any unexpected error during the job's execution,
-  # marking the song as 'failed' so the user gets feedback.
   rescue_from(StandardError) do |exception|
     song = arguments.first
     song&.failed!
@@ -19,8 +12,6 @@ class GenerateSongJob < ApplicationJob
   def perform(song)
     user = song.user
 
-    # The concurrency check is now handled automatically by Solid Queue before `perform` is called.
-    # We can immediately set the status to processing.
     song.processing!
 
     # === Step 1: Check Credits ===

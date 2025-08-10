@@ -47,7 +47,7 @@
             <%= form.text_area :full_described_song,
                   placeholder: "A dreamy lofi hip hop song...",
                   class: "input bg-shade border-subtle",
-                  style: "min-block-size: 160px; resize: none;",
+                  style: "min-block-size: 120px; resize: none;",
                   data: { song_panel_target: "descriptionField" } %>
           </div>
           <div class="flex items-center justify-between">
@@ -94,7 +94,7 @@
             <%= form.text_area :lyrics,
                   placeholder: (active_lyrics_mode == 'auto' ? 'Describe your lyrics...' : 'Add your own lyrics here'),
                   class: "input bg-shade border-subtle",
-                  style: "min-block-size: 160px; resize: none;",
+                  style: "min-block-size: 120px; resize: none;",
                   data: { song_panel_target: "lyricsField" } %>
           </div>
           <div class="flex items-center justify-between">
@@ -127,7 +127,7 @@
 
   <%# The sticky footer with the `mbs-auto` class to push it to the bottom. %>
   <div class="mbs-auto border-bs border-subtle p-5">
-    <%= form.button class: "btn i-full font-medium text-main bg-rose-500 hover:bg-rose-600", data: { song_panel_target: "submitButton" } do %>
+    <%= form.button class: "btn i-full text-gray-50 bg-rose-500 hover:bg-rose-600", data: { song_panel_target: "submitButton" } do %>
       <span class="icon icon--loading animate-spin hidden" data-song-panel-target="spinnerIcon" aria-hidden="true"></span>
       <span class="icon icon--music" data-song-panel-target="musicIcon" aria-hidden="true"></span>
       <span class="mis-2" data-song-panel-target="submitButtonText">Create</span>

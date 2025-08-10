@@ -1,0 +1,22 @@
+<% return if songs.empty? %>
+
+<% button_data = floating_status_button_data(songs) %>
+
+<div id="floating_status_button_container" class="hide@lg">
+  <%= render partial: "layouts/shared/mobile_sheet_trigger", locals: {
+    label: "Track Status",
+    content_partial: "songs/track_list",
+    songs: songs,
+    trigger: capture do %>
+
+      <%# This is the button itself, using your new `fixed-bottom-right` class %>
+      <div class="fixed-bottom-right">
+        <button type="button" class="btn <%= button_data[:css_class] %> shadow-lg" data-action="dialog#showModal">
+          <span class="icon <%= button_data[:icon] %> <%= 'animate-spin' if button_data[:animate] %>" aria-hidden="true"></span>
+          <span class="sr-only"><%= button_data[:text] %></span>
+        </button>
+      </div>
+
+    <% end
+  } %>
+</div>

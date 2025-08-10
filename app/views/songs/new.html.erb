@@ -5,12 +5,14 @@
   <%= turbo_stream_from current_user %>
 <% end %>
 
-<div class="grow grid@lg grid-cols-12@lg" style="height: calc(100dvh - 4rem);">
+<div class="grow grid@lg grid-cols-12@lg lg-constrained-height">
   <div class="col-span-4@md flex flex-col overflow-hidden">
     <%= render "form", song: @song %>
+    
+    <%= render "songs/track_status_sheet", songs: @songs %>
   </div>
 
-  <div class="col-span-8@md overflow-hidden">
+  <div class="col-span-8@md overflow-hidden show@lg">
     <div class="bg-main border-is border-subtle p-5 b-full h-full">
       <%= render "songs/track_list", songs: @songs %>
     </div>

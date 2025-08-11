@@ -1,10 +1,10 @@
 class Song < ApplicationRecord
-  attr_accessor :mode, :lyrics_mode
+  attr_accessor :mode, :lyrics_mode, :current_user_like
 
   validates :title, presence: true, length: { maximum: 100 }
   validate :valid_for_generation, on: :create
 
-  belongs_to :user, counter_cache: :songs_count
+  belongs_to :user, counter_cache: true
 
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user

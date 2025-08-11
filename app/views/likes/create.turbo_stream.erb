@@ -1,0 +1,4 @@
+<%= turbo_stream.replace dom_id(@song, "like_button") do %>
+  <% @song.current_user_like = @like %>
+  <%= render 'likes/like_button', song: @song %>
+<% end %>

@@ -272,3 +272,12 @@ button.card-image-wrapper {
   right: 1.5rem;  /* Adjust as needed */
   z-index: 10;    /* Make sure it's on top of other content */
 }
+
+.icon--heart-solid {
+  --svg: url("heart-solid.svg");
+}
+
+/* A utility class to control the fill of an icon */
+.icon-filled {
+  background-color: var(--icon-color, currentColor); 
+}

@@ -1,0 +1,30 @@
+<%# Generates a unique HTML ID like "card_like_song_42" %>
+<% frame_id = dom_id(song, "card_like") %>
+
+<%= turbo_frame_tag frame_id do %>
+  <div class="flex items-center gap-half">
+    <% if user_signed_in? %>
+      <%# Use the preloaded data from the controller to avoid a database query %>
+      <% like = song.current_user_like %>
+
+      <% if like.nil? %>
+        <%# "LIKE" FORM %>
+        <%= form_with model: [song, Like.new], html: { "data-turbo-frame": frame_id } do |f| %>
+          <%= f.button class: "btn btn--icon btn--plain", "aria-label": "Like song" do %>
+            <span class="icon icon--heart text-subtle" style="--icon-size: 1rem;"></span>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%# "UNLIKE" FORM %>
+        <%= form_with url: song_like_path(song, like), method: :delete, html: { "data-turbo-frame": frame_id } do |f| %>
+          <%= f.button class: "btn btn--icon btn--plain", "aria-label": "Unlike song" do %>
+            <span class="icon icon--heart-solid text-negative" style="--icon-size: 1rem;"></span>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%# Use the fast counter_cache column for the total count %>
+    <span class="text-sm text-subtle"><%= pluralize(song.likes_count, "like") %></span>
+  </div>
+<% end %>

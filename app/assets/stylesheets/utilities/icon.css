@@ -1,14 +1,22 @@
 .icon {
-  background-color: var(--icon-color, currentColor);
-  block-size: var(--icon-size, 1rem);
   display: inline-block;
-  flex-shrink: 0;
+  block-size: var(--icon-size, 1rem);
   inline-size: var(--icon-size, 1rem);
   mask-image: var(--svg);
   mask-repeat: no-repeat;
   mask-size: cover;
+  background-color: var(--icon-color, currentColor); /* Default to filled */
+  flex-shrink: 0;
   pointer-events: none;
   user-select: none;
+}
+
+/* New class for outline icons */
+.icon-outline {
+  background-color: transparent;
+  border: 1.5px solid var(--icon-color, currentColor); /* Adjust thickness */
+  /* This ensures the border thickness is included in the size */
+  box-sizing: border-box; 
 }
 img.icon {
   background: none;
@@ -95,6 +103,7 @@ img.icon {
 .icon--settings { --svg: url("settings.svg"); }
 .icon--apps { --svg: url("apps.svg"); }
 .icon--heart { --svg: url("heart.svg"); }
+.icon--heart-solid   { --svg: url("heart-solid.svg"); }
 .icon--circle-pause { --svg: url("circle-pause.svg"); }
 .icon--play-circle { --svg: url("play-circle.svg"); }
 .icon--pause-circle { --svg: url("pause-circle.svg"); }

@@ -13,7 +13,19 @@ class SongsController < DashboardController
 
   def grid
     sleep 1 if Rails.env.development?
-    @songs = Song.processed.order(created_at: :desc).includes(:user, :categories)
+
+    # 1. Get all the songs, preloading standard associations.
+    @songs = Song.processed
+                .order(created_at: :desc)
+                .includes(:user, :categories)
+
+    # 2. If a user is signed in, efficiently preload their like status.
+    if user_signed_in?
+      # This creates a hash of { song_id => like_object } in just ONE extra query.
+      user_likes = current_user.likes.where(song_id: @songs.map(&:id)).index_by(&:song_id)
+      # Attach this preloaded data to each song object in memory.
+      @songs.each { |song| song.current_user_like = user_likes[song.id] }
+    end
   end
 
   def new
@@ -32,6 +44,14 @@ class SongsController < DashboardController
       end
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def show
+    @song = Song.includes(:user, :categories).find(params[:id])
+
+    if user_signed_in?
+      @song.current_user_like = current_user.likes.find_by(song_id: @song.id)
     end
   end
 

@@ -1,5 +1,5 @@
 class Song < ApplicationRecord
-  attr_accessor :mode, :lyrics_mode, :current_user_like
+  attr_accessor :mode, :lyrics_mode, :current_user_like, :presigned_audio_url, :presigned_thumbnail_url
 
   validates :title, presence: true, length: { maximum: 100 }
   validate :valid_for_generation, on: :create

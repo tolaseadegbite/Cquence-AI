@@ -1,2 +1,14 @@
 <% provide(:title, @song.title) %>
 <% content_for :page_header, "Song Details" %>
+
+<div class="grow grid@lg grid-cols-12@lg">
+  <div class="col-span-6@md flex flex-col overflow-hidden">
+    <%= simple_format(@song.lyrics) %>
+  </div>
+
+  <div class="col-span-6@md overflow-hidden">
+    <div class="bg-main p-5 b-full i-full">
+      
+    </div>
+  </div>
+</div>

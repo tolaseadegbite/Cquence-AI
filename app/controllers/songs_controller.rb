@@ -12,19 +12,19 @@ class SongsController < DashboardController
   end
 
   def grid
-    sleep 1 if Rails.env.development?
-
-    # 1. Get all the songs, preloading standard associations.
     @songs = Song.processed
-                .order(created_at: :desc)
-                .includes(:user, :categories)
+                 .order(created_at: :desc)
+                 .includes(:user, :categories)
 
-    # 2. If a user is signed in, efficiently preload their like status.
     if user_signed_in?
-      # This creates a hash of { song_id => like_object } in just ONE extra query.
-      user_likes = current_user.likes.where(song_id: @songs.map(&:id)).index_by(&:song_id)
-      # Attach this preloaded data to each song object in memory.
+      song_ids = @songs.pluck(:id)
+      user_likes = current_user.likes.where(song_id: song_ids).index_by(&:song_id)
       @songs.each { |song| song.current_user_like = user_likes[song.id] }
+    end
+
+    @songs.each do |song|
+      song.presigned_audio_url = presigned_s3_url(song.s3_key)
+      song.presigned_thumbnail_url = presigned_s3_url(song.thumbnail_s3_key)
     end
   end
 
@@ -53,6 +53,10 @@ class SongsController < DashboardController
     if user_signed_in?
       @song.current_user_like = current_user.likes.find_by(song_id: @song.id)
     end
+
+    # Keep the sequential pre-loading for the single song show page.
+    @song.presigned_audio_url = presigned_s3_url(@song.s3_key)
+    @song.presigned_thumbnail_url = presigned_s3_url(@song.thumbnail_s3_key)
   end
 
   def update

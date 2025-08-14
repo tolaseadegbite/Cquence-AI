@@ -1,4 +1,4 @@
-class SongsController < DashboardController
+class SongsController < ApplicationController
   include S3Helper
 
   INSPIRATION_TAGS = [
@@ -16,15 +16,42 @@ class SongsController < DashboardController
                  .order(created_at: :desc)
                  .includes(:user, :categories)
 
+    fresh_when @songs
+
     if user_signed_in?
       song_ids = @songs.pluck(:id)
       user_likes = current_user.likes.where(song_id: song_ids).index_by(&:song_id)
       @songs.each { |song| song.current_user_like = user_likes[song.id] }
     end
 
+    # ==========================================================
+    # FINAL OPTIMIZATION (CORRECTED): Use fetch_multi
+    # ==========================================================
+
+    # Build an array of the cache keys we need.
+    # The key is an array containing the song object and a string.
+    cache_keys = @songs.map { |s| [ s, "presigned_urls" ] }
+
+    # `fetch_multi` will yield the *key* on a cache miss.
+    # We destructure the key `[song, _]` to get the song object.
+    cached_urls = Rails.cache.fetch_multi(*cache_keys, expires_in: 50.minutes) do |key|
+      song = key.first # Extract the song object from the key array
+
+      # This block now correctly operates on the `song` object.
+      {
+        audio_url: presigned_s3_url(song.s3_key),
+        thumbnail_url: presigned_s3_url(song.thumbnail_s3_key)
+      }
+    end
+
+    # Assign the retrieved URLs to the song objects.
     @songs.each do |song|
-      song.presigned_audio_url = presigned_s3_url(song.s3_key)
-      song.presigned_thumbnail_url = presigned_s3_url(song.thumbnail_s3_key)
+      # Use the same key structure to look up the result in the hash.
+      urls = cached_urls[[ song, "presigned_urls" ]]
+      if urls
+        song.presigned_audio_url = urls[:audio_url]
+        song.presigned_thumbnail_url = urls[:thumbnail_url]
+      end
     end
   end
 

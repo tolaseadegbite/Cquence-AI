@@ -17,37 +17,65 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%= stylesheet_link_tag "css-zero/reset" %>
-    <%= stylesheet_link_tag "css-zero/variables" %>
-    <%= stylesheet_link_tag :app %>
-    <%= stylesheet_link_tag "css-zero/utilities" %>
+    <%= stylesheet_link_tag "css-zero/reset", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "css-zero/variables", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "css-zero/utilities", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <%# --- This layout is for PUBLIC and AUTH pages --- %>
+  <%
+    # Define helper booleans at the top for cleaner logic below.
+    # Assumes you have a `current_user` helper method for authentication.
+    is_dashboard_view = current_user.present?
+    is_auth_page = !is_dashboard_view && controller_name.in?(['sessions', 'passwords', 'registrations', 'passwordlesses', 'password_resets'])
+    is_public_page = !is_dashboard_view && controller_name == 'pages'
+  %>
 
-  <% auth_pages = controller_name.in?(['sessions', 'passwords', 'registrations', 'passwordlesses', 'password_resets']) %>
-
-  <body class="<%= 'min-b-screen flex flex-col justify-center items-center p-4' if auth_pages %> bg-main" data-controller="color-scheme">
+  <body class="<%= 'min-b-screen flex flex-col justify-center items-center p-4' if is_auth_page %> bg-main" data-controller="color-scheme <%= 'player' if is_dashboard_view %>" <% if is_dashboard_view %>data-action="show@window->player#show"<% end %>>
 
     <div id="flash_messages">
-      <%# Now we just render the partial %>
       <%= render "layouts/shared/flash" %>
     </div>
 
+    <%# --- Main Conditional Layout Logic --- %>
 
-    <% if controller_name == 'pages' %>
-      <%= render "layouts/navigation/public/navbar" %>
-    <% end %>
+    <% if is_dashboard_view %>
+      <%# --- RENDER DASHBOARD LAYOUT --- %>
+      <div class="sidebar-layout">
+        <aside id="sidebar">
+          <%= render "layouts/navigation/dashboard/sidebar_menu" %>
+        </aside>
 
-    <% if auth_pages %>
-      <%= yield %>
+        <main id="main" style="padding: 0 !important; gap: 0">
+          <div class="header-layout">
+            <header class="" id="header">
+              <%= render "layouts/navigation/dashboard/mobile_menu" %>
+              <%= render "layouts/navigation/dashboard/header_menu" %>
+            </header>
+            <%= yield %>
+          </div>
+
+          <%= render "layouts/shared/desktop_player" %>
+        </main>
+      </div>
+
     <% else %>
-      <main id="main">
-        <div class="container">
-          <%= yield %>
-        </div>
-      </main>
+      <%# --- RENDER PUBLIC/AUTH LAYOUT --- %>
+      <% if is_public_page %>
+        <%= render "layouts/navigation/public/navbar" %>
+      <% end %>
+
+      <% if is_auth_page %>
+        <%= yield %>
+      <% else %>
+        <main id="main">
+          <div class="container">
+            <%= yield %>
+          </div>
+        </main>
+      <% end %>
+
     <% end %>
   </body>
 </html>

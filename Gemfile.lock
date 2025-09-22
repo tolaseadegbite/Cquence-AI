@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/lazaronixon/css-zero.git
-  revision: e169497b17a5317ad62eaa06aeb72753f132690e
+  revision: b8f4fcb41300ab0d46890a99f16577bddf5af0c4
   specs:
-    css-zero (2.0.1)
+    css-zero (2.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -488,7 +488,7 @@ DEPENDENCIES
   bootsnap
   brakeman
   capybara
-  css-zero (~> 2.0)!
+  css-zero (~> 2.1)!
   debug
   hotwire-spark
   image_processing (~> 1.2)

@@ -23,7 +23,21 @@
             Create
           <% end %>
 
+          <%= link_to songs_path,
+                      class: "btn sidebar-menu__button mbe-1",
+                      aria: (current_page?(songs_path) ? { current: "page" } : {}) do %>
+            <span class="icon icon--music" aria-hidden="true"></span>
+            Your songs
+          <% end %>
+
           <%= link_to "",
+                      class: "btn sidebar-menu__button mbe-1",
+                      aria: (current_page?("") ? { current: "page" } : {}) do %>
+            <span class="icon icon--heart" aria-hidden="true"></span>
+            Liked songs
+          <% end %>
+
+          <!--<%= link_to "",
                       class: "btn sidebar-menu__button mbe-1",
                       aria: (current_page?("library") ? { current: "page" } : {}) do %>
             <span class="icon icon--list-music" aria-hidden="true"></span>
@@ -67,7 +81,7 @@
                       aria: (current_page?("") ? { current: "page" } : {}) do %>
             <span class="icon icon--heart" aria-hidden="true"></span>
             Liked songs
-          <% end %>
+          <% end %>-->
         </nav>
       </div>
     </div>

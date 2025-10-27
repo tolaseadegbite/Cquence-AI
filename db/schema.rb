@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_11_004210) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_26_094344) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -36,11 +36,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_11_004210) do
 
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "song_id", null: false
+    t.string "likeable_type", null: false
+    t.bigint "likeable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["song_id"], name: "index_likes_on_song_id"
-    t.index ["user_id", "song_id"], name: "index_likes_on_user_id_and_song_id", unique: true
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
+    t.index ["user_id", "likeable_type", "likeable_id"], name: "index_likes_on_user_id_and_likeable_type_and_likeable_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
@@ -132,7 +133,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_11_004210) do
   end
 
   add_foreign_key "events", "users"
-  add_foreign_key "likes", "songs"
   add_foreign_key "likes", "users"
   add_foreign_key "recovery_codes", "users"
   add_foreign_key "security_keys", "users"

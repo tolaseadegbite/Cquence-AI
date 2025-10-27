@@ -64,6 +64,9 @@ Rails.application.routes.draw do
       get :play_url
       patch :toggle_publish
     end
+    collection do
+      get 'liked'
+    end
     get :grid, on: :collection
     resources :likes, only: [ :create, :destroy ]
   end
@@ -71,6 +74,8 @@ Rails.application.routes.draw do
   resource :dashboard, only: [ :show ], controller: "dashboard" do
     get :published_songs, on: :collection
   end
+
+  resources :likes, only: %i[create destroy]
 
   get "settings", to: "home#index"
   get "pricing", to: "pages#pricing"

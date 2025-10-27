@@ -19,8 +19,9 @@ class User < ApplicationRecord
   has_many :events, dependent: :destroy
 
   has_many :songs, dependent: :destroy
-  has_many :likes, dependent: :destroy
-  has_many :liked_songs, through: :likes, source: :song
+  # has_many :likes, dependent: :destroy
+  # has_many :liked_songs, through: :likes, source: :song
+  has_many :likes
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 12 }

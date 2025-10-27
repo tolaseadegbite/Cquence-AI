@@ -1,17 +1,15 @@
 <div id="song-<%= song.id %>">
-    <%# --- MODIFIED: Removed data-player-target, using a plain data-attribute --- %>
     <button type="button" class="card-image-wrapper mbe-2"
             data-action="player#show"
             data-song-card="true"
-            data-player-url-param="<%= song.presigned_audio_url %>"         <%# CHANGED %>
+            data-player-url-param="<%= song.presigned_audio_url %>"
             data-player-title-param="<%= song.title %>"
             data-player-artist-param="<%= song.user.name %>"
-            data-player-artwork-param="<%= song.presigned_thumbnail_url %>" <%# CHANGED %>
-            data-song-url="<%= song.presigned_audio_url %>">                <%# CHANGED %>
+            data-player-artwork-param="<%= song.presigned_thumbnail_url %>"
+            data-song-url="<%= song.presigned_audio_url %>">               
         <div class="relative">
-            <%# Use an `if` here because the pre-generated URL is now what matters %>
-            <% if song.presigned_thumbnail_url %>                           <%# CHANGED %>
-                <%= image_tag song.presigned_thumbnail_url, alt: song.title, class: "block album-art object-cover rounded-md" %> <%# CHANGED %>
+            <% if song.presigned_thumbnail_url %>
+                <%= image_tag song.presigned_thumbnail_url, alt: song.title, class: "block album-art object-cover rounded-md" %>
             <% else %>
             <div class="bg-surface album-art rounded-md flex items-center justify-center">
                 <span class="icon icon--music text-subtle" style="--icon-size: 3rem"></span>
@@ -25,10 +23,13 @@
     
     <%= link_to song_path(song), class: "block", data: { turbo_frame: "_top" } do %>
         <p class="text-base font-semibold overflow-ellipsis whitespace-nowrap"><%= song.title %></p>
-        <p class="text-sm text-subtle mbe-1"><%= song.user.name %></p>
+        <div class="flex justify-between gap items-center">
+            <p class="text-sm text-subtle mbe-1"><%= song.user.name %></p>
+            <p class="text-sm text-subtle mbe-1"><%= pluralize(song.likes_count, "like") %></p>
+        </div>
     <% end %>
     <div class="flex items-center justify-between gap-1">
         <p class="text-sm text-subtle"><%= pluralize(song.listen_count, "listen") %></p>
-        <%= render 'likes/like_button', song: song %>
+        <%= render partial: 'likes/button', locals: { likeable: song } %>
     </div>
 </div>

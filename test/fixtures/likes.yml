@@ -2,8 +2,10 @@
 
 one:
   user: one
-  song: one
+  likeable: one
+  likeable_type: Likeable
 
 two:
   user: two
-  song: two
+  likeable: two
+  likeable_type: Likeable

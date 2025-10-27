@@ -6,8 +6,9 @@ class Song < ApplicationRecord
 
   belongs_to :user, counter_cache: true
 
-  has_many :likes, dependent: :destroy
-  has_many :liked_users, through: :likes, source: :user
+  # has_many :likes, dependent: :destroy
+  # has_many :liked_users, through: :likes, source: :user
+  has_many :likes, as: :likeable
   has_many :song_categories, dependent: :destroy
   has_many :categories, through: :song_categories
 

@@ -13,7 +13,7 @@ gem "solid_cache"
 gem "solid_cable"
 gem "solid_queue"
 gem "stimulus-rails"
-gem "sqlite3",                              "2.5.0"
+gem "sqlite3",                              "2.7.4"
 gem "thruster", require: false
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]

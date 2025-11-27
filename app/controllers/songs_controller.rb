@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
   include S3Helper
+  before_action :authenticate, except: [ :index, :show ]
 
   INSPIRATION_TAGS = [
     "80s synth-pop", "Acoustic ballad", "Epic movie score",
@@ -9,32 +10,13 @@ class SongsController < ApplicationController
   before_action :set_shared_form_data, only: [ :new, :create ]
 
   def index
-  end
-
-  def grid
     @songs = Song.processed
                  .order(created_at: :desc)
                  .includes(:user, :categories, :likes)
-
-    fresh_when @songs
-
-    cache_keys = @songs.map { |s| [ s, "presigned_urls" ] }
-
-    cached_urls = Rails.cache.fetch_multi(*cache_keys, expires_in: 50.minutes) do |key|
-      song = key.first
-
-      {
-        audio_url: presigned_s3_url(song.s3_key),
-        thumbnail_url: presigned_s3_url(song.thumbnail_s3_key)
-      }
-    end
-
+    
     @songs.each do |song|
-      urls = cached_urls[[ song, "presigned_urls" ]]
-      if urls
-        song.presigned_audio_url = urls[:audio_url]
-        song.presigned_thumbnail_url = urls[:thumbnail_url]
-      end
+      song.presigned_audio_url = presigned_s3_url(song.s3_key)
+      song.presigned_thumbnail_url = presigned_s3_url(song.thumbnail_s3_key)
     end
   end
 

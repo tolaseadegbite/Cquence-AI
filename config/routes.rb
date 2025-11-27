@@ -67,13 +67,10 @@ Rails.application.routes.draw do
     collection do
       get 'liked'
     end
-    get :grid, on: :collection
     resources :likes, only: [ :create, :destroy ]
   end
 
-  resource :dashboard, only: [ :show ], controller: "dashboard" do
-    get :published_songs, on: :collection
-  end
+  resource :dashboard, only: [ :show ]
 
   resources :likes, only: %i[create destroy]
 

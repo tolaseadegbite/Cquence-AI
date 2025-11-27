@@ -35,7 +35,7 @@ end
 group :development do
   # Use console on exceptions pages
   gem "web-console"
-  gem "hotwire-spark"
+  # gem "hotwire-spark"
   gem "letter_opener_web", "~> 3.0"
 end
 

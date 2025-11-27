@@ -25,8 +25,6 @@
   </head>
 
   <%
-    # Define helper booleans at the top for cleaner logic below.
-    # Assumes you have a `current_user` helper method for authentication.
     is_dashboard_view = current_user.present?
     is_auth_page = !is_dashboard_view && controller_name.in?(['sessions', 'passwords', 'registrations', 'passwordlesses', 'password_resets'])
     is_public_page = !is_dashboard_view && controller_name == 'pages'
@@ -47,7 +45,7 @@
           <%= render "layouts/navigation/dashboard/sidebar_menu" %>
         </aside>
 
-        <main id="main" style="padding: 0 !important; gap: 0">
+        <main id="main" style="padding: 0 !important; gap: 0 !important;">
           <div class="header-layout">
             <header class="" id="header">
               <%= render "layouts/navigation/dashboard/mobile_menu" %>

@@ -1,14 +1,13 @@
-<% provide(:title, "Your songs") %>
-<% content_for :page_header, "Your Songs" %>
+<% content_for :title, "My songs" %>
 
-<div class="main-wrapper py-3 px-4">
+<% content_for :page_header do %>
+  <h4 class="font-semibold">My Songs</h4>
+<% end %>
+
+<div class="p-4 i-full">
   <section class="mbe-10">
-    <%= render "layouts/shared/async_loader", frame_id: "songs_grid", src_path: grid_songs_path do %>
-      <div class="grid grid-cols-2 grid-cols-3@sm grid-cols-3@md grid-cols-6@lg gap-x-4 gap-y-8">
-        <% 18.times do %>
-          <%= render "songs/song_skeleton" %>
-        <% end %>
-      </div>
-    <% end %>
+    <div class="grid grid-cols-2 grid-cols-3@sm grid-cols-3@md grid-cols-6@lg gap-x-4 gap-y-8">
+      <%= render @songs %>
+    </div>
   </section>
 </div>
